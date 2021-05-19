@@ -34,7 +34,7 @@ import { getAllModel, deleteModel } from '@/api/base'
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'Design',
+  name: 'BuildModel',
   inheritAttrs: false,
   components: {
     ConfigPanel,

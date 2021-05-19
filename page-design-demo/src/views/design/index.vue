@@ -49,7 +49,7 @@ import RightPropArea from './module/RightPropArea.vue'
 import { cloneDeep } from 'lodash'
 import { LocalPageDataKey } from '@/constants'
 export default {
-  name: 'Design',
+  name: 'PageDesign',
   inheritAttrs: false,
   components: {
     OperateArea,

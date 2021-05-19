@@ -15,7 +15,8 @@
     "**/.gitattributes": true,
     "**/.*": false,
     "yarn.lock": false,
-    "LICENSE": true
+    "LICENSE": true,
+    "**/lib": true
   },
 
   "html.format.endWithNewline": true,
