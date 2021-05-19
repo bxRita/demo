@@ -79,7 +79,7 @@ export default {
     this.init()
   },
   methods: {
-    ...mapActions('design', ['addWidget']),
+    ...mapActions('pageModel', ['addWidget']),
     init() {
       let componentConfig = new Configuration().getDefaultConfig()
       let basisMap = [],

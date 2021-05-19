@@ -246,7 +246,7 @@ export default {
   },
   mounted() {},
   methods: {
-    ...mapActions('design', ['updateWidgetEvent']),
+    ...mapActions('pageModel', ['updateWidgetEvent']),
     init() {
       if (eventSettingIns) eventSettingIns.resetEventSetting()
 
@@ -275,10 +275,8 @@ export default {
       this.componentsEventsObj = Object.assign({}, _componentsEventsObj)
     },
     createEventListener() {
-      const {
-        eventData,
-        linkageEventData
-      } = eventSettingIns.createEventListener()
+      const { eventData, linkageEventData } =
+        eventSettingIns.createEventListener()
 
       this.eventData = eventData.slice(0)
       this.linkageEventData = linkageEventData.slice(0)

@@ -9,4 +9,4 @@
  */
 import design from './design'
 
-export default { design }
+export default { pageModel: design }

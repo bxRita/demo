@@ -95,7 +95,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('design', ['pageData', 'currentSelectItem']),
+    ...mapGetters('pageModel', ['pageData', 'currentSelectItem']),
     designData() {
       return cloneDeep(this.pageData)
     },
@@ -109,7 +109,7 @@ export default {
     this.init()
   },
   methods: {
-    ...mapActions('design', ['resetDesignPanel']),
+    ...mapActions('pageModel', ['resetDesignPanel']),
     init() {
       const clientH = document.body.clientHeight,
         contentH = clientH - 3

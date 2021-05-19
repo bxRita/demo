@@ -88,7 +88,7 @@ export default {
     return {}
   },
   methods: {
-    ...mapActions('design', ['updateWidgetProp']),
+    ...mapActions('pageModel', ['updateWidgetProp']),
     changeTabEvent(val) {
       this.eventFunctionHandler('change', val)
       this.options.activeKey = val

@@ -104,7 +104,7 @@ export default {
     },
     // 更新store中节点数据
     updateCell() {
-      this.$store.dispatch('design/updateCellById', this.cellData)
+      this.$store.dispatch('erModel/updateCellById', this.cellData)
     },
     /**
      * @description 修改名称事件

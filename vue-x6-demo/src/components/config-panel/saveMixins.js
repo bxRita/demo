@@ -25,7 +25,7 @@ export default {
       this.cellData.isSaved = true
     },
     async updateModel(modelData, cellData) {
-      const bakCell = this.$store.getters['design/getBakCellById'](
+      const bakCell = this.$store.getters['erModel/getBakCellById'](
         this.cellData.id
       )
       if (bakCell) {

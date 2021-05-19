@@ -85,10 +85,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('design', ['currentSelectItem'])
+    ...mapGetters('pageModel', ['currentSelectItem'])
   },
   methods: {
-    ...mapActions('design', [
+    ...mapActions('pageModel', [
       'upsertWidget',
       'setSelectedWidget',
       'deleteSelectedWidget',

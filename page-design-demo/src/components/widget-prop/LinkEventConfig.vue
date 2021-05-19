@@ -92,7 +92,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('design', [
+    ...mapGetters('pageModel', [
       'currentSelectItem',
       'getAllWidget',
       'getWidgetById'

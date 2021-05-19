@@ -9,6 +9,10 @@
  */
 import BuildModel from './src/views/design/index.vue'
 
+import erModel from './src/store/modules/design'
+
 BuildModel.install = Vue => Vue.component(BuildModel.name, BuildModel) //注册组件
+
+export { erModel }
 
 export default BuildModel

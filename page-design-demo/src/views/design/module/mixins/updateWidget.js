@@ -11,7 +11,7 @@ export default {
   computed: {
     // 检测当前组件的属性值 是否有更新
     needUpdate() {
-      let str = this.$store.getters['design/widgetPropUpdate']
+      let str = this.$store.getters['pageModel/widgetPropUpdate']
       if (str) {
         let arr = str.split('-')
         return arr

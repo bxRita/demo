@@ -3,7 +3,17 @@ const resolve = dir => {
   return path.join(__dirname, dir)
 }
 
+// const isProd = process.env.NODE_ENV === 'production'
 module.exports = {
+  // configureWebpack: {
+  //   externals: isProd
+  //     ? {
+  //         vue: 'Vue',
+  //         'vue-router': 'VueRouter',
+  //         vuex: 'Vuex'
+  //       }
+  //     : {}
+  // },
   chainWebpack: config => {
     config.resolve.alias.set('@', resolve('src'))
     // GraphQL Loader

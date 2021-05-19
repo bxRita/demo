@@ -170,7 +170,7 @@ export default {
     this.init(this.id)
   },
   methods: {
-    ...mapActions('design', ['updateCellById', 'updateRelateNodeCell']),
+    ...mapActions('erModel', ['updateCellById', 'updateRelateNodeCell']),
     async init(cellId) {
       this.curCell = this.graph.getCellById(cellId)
       this.cellModel = Object.assign(

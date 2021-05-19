@@ -39,7 +39,7 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    ...mapActions('design', [
+    ...mapActions('pageModel', [
       'addWidgetDataItem',
       'deleteWidgetDataItem',
       'updateWidgetDataItem'

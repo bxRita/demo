@@ -94,7 +94,7 @@ export default {
       this.name = cellData.bxDatas.modelName
       this.fieldOp.fields = cellData.bxDatas.fieldsList
       this.fieldOp.fieldTypes =
-        cloneDeep(this?.$store?.getters['design/fieldTypes']()) || []
+        cloneDeep(this?.$store?.getters['erModel/fieldTypes']()) || []
       this.type = cellData.cellType
 
       this.fieldOp.basisTypes = await getSysDictField(
@@ -242,7 +242,7 @@ export default {
       this.fieldOp.show = true
     },
     updateCell() {
-      this.$store.dispatch('design/updateCellById', this.cellData)
+      this.$store.dispatch('erModel/updateCellById', this.cellData)
     },
     handleChangeType() {
       this.cellData.cellType = this.type

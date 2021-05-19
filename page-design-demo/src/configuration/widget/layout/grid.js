@@ -57,7 +57,7 @@ export const gridConfig = {
             span: 12,
             list: []
           }
-          vm.$store.dispatch('design/addGridCol', {
+          vm.$store.dispatch('pageModel/addGridCol', {
             widgetId: curWidget.id,
             col
           })
@@ -65,7 +65,7 @@ export const gridConfig = {
         // 删除列
         function deleteGridCol(idx, vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('design/deleteGridCol', {
+          vm.$store.dispatch('pageModel/deleteGridCol', {
             widgetId: curWidget.id,
             colIdx: idx
           })
@@ -73,7 +73,7 @@ export const gridConfig = {
         // 更新列宽值
         function updateGridCol(val, idx, vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('design/updateGridColSpan', {
+          vm.$store.dispatch('pageModel/updateGridColSpan', {
             widgetId: curWidget.id,
             colIdx: idx,
             val

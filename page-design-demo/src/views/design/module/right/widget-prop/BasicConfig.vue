@@ -33,7 +33,7 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    ...mapActions('design', ['updateWidgetProp']),
+    ...mapActions('pageModel', ['updateWidgetProp']),
     // 属性变更 公共方法处理
     handlerData(id, type) {
       const _this = this

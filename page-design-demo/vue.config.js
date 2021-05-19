@@ -4,6 +4,13 @@ const resolve = dir => {
 }
 
 module.exports = {
+  // configureWebpack: {
+  //   externals: {
+  //     vue: 'Vue',
+  //     'vue-router': 'VueRouter',
+  //     vuex: 'Vuex'
+  //   }
+  // },
   chainWebpack: config => {
     config.resolve.alias.set('@', resolve('src'))
     // 增加在线编辑器插件

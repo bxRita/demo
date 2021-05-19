@@ -63,7 +63,11 @@ export default {
     this.isReady = true
   },
   methods: {
-    ...mapActions('design', ['initDesignCells', 'bakDesignCells', 'setSelect']),
+    ...mapActions('erModel', [
+      'initDesignCells',
+      'bakDesignCells',
+      'setSelect'
+    ]),
     setSelectedNode(cell) {
       this.setSelect(cell)
     },

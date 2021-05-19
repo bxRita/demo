@@ -33,7 +33,7 @@ export default {
   computed: {
     nodeData() {
       return (
-        globalStore.getters['design/getCellById'](this.id) || {
+        globalStore.getters['erModel/getCellById'](this.id) || {
           bxDatas: DEFAULT
         }
       )

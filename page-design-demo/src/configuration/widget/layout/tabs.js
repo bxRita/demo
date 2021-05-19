@@ -84,14 +84,14 @@ export const gridConfig = {
         // 新增列
         function addTabCol(vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('design/addTabCol', {
+          vm.$store.dispatch('pageModel/addTabCol', {
             widgetId: curWidget.id
           })
         }
         // 删除列
         function deleteTabCol(idx, vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('design/deleteTabCol', {
+          vm.$store.dispatch('pageModel/deleteTabCol', {
             widgetId: curWidget.id,
             colIdx: idx
           })
@@ -99,7 +99,7 @@ export const gridConfig = {
         // 更新列宽值
         function updateTabCol(event, idx, vm, propKey) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('design/updateTabProp', {
+          vm.$store.dispatch('pageModel/updateTabProp', {
             widgetId: curWidget.id,
             colIdx: idx,
             val: event.target.value,

@@ -96,14 +96,14 @@ export const gridConfig = {
         // 新增行
         function addTableRow(vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('design/addTableRow', {
+          vm.$store.dispatch('pageModel/addTableRow', {
             widgetId: curWidget.id
           })
         }
         // 新增列
         function addTableCol(vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('design/addTableCol', {
+          vm.$store.dispatch('pageModel/addTableCol', {
             widgetId: curWidget.id
           })
         }
