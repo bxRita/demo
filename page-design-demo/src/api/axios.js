@@ -7,7 +7,6 @@
  * Task: #1
  * Write a description of the code here.
  */
-
 const VueAxios = {
   vm: {},
   // eslint-disable-next-line no-unused-vars

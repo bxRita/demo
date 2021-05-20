@@ -35,9 +35,9 @@ import CollapseItem from './CollapseItem'
 import Configuration from '@/configuration/Configuration'
 import { generateId } from '@/utils/tools'
 import { cloneDeep } from 'lodash'
-import { WidgetType } from '@/constants'
+import { WidgetType, StoreModel } from '@/constants'
 export default {
-  name: 'LeftComponent',
+  name: 'WidgetList',
   inheritAttrs: false,
   components: {
     CollapseItem
@@ -79,7 +79,7 @@ export default {
     this.init()
   },
   methods: {
-    ...mapActions('pageModel', ['addWidget']),
+    ...mapActions(StoreModel.design, ['addWidget']),
     init() {
       let componentConfig = new Configuration().getDefaultConfig()
       let basisMap = [],

@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { StoreModel } from '@/constants'
 import { mapGetters } from 'vuex'
 export default {
   name: 'LinkEventConfig',
@@ -92,7 +93,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('pageModel', [
+    ...mapGetters(StoreModel.design, [
       'currentSelectItem',
       'getAllWidget',
       'getWidgetById'

@@ -8,7 +8,7 @@
  * Write a description of the code here.
  */
 import layoutConfig from '@/configuration/common/layout'
-import { WidgetComponentName } from '@/constants'
+import { WidgetComponentName, StoreModel } from '@/constants'
 export const gridConfig = {
   type: layoutConfig.compType,
   key: WidgetComponentName.TABS,
@@ -84,14 +84,14 @@ export const gridConfig = {
         // 新增列
         function addTabCol(vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('pageModel/addTabCol', {
+          vm.$store.dispatch(`${StoreModel.design}/addTabCol`, {
             widgetId: curWidget.id
           })
         }
         // 删除列
         function deleteTabCol(idx, vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('pageModel/deleteTabCol', {
+          vm.$store.dispatch(`${StoreModel.design}/deleteTabCol`, {
             widgetId: curWidget.id,
             colIdx: idx
           })
@@ -99,7 +99,7 @@ export const gridConfig = {
         // 更新列宽值
         function updateTabCol(event, idx, vm, propKey) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('pageModel/updateTabProp', {
+          vm.$store.dispatch(`${StoreModel.design}/updateTabProp`, {
             widgetId: curWidget.id,
             colIdx: idx,
             val: event.target.value,

@@ -7,6 +7,11 @@
  * Task: #1
  * Write a description of the code here.
  */
+
+// store 命名空间 模块名
+export const StoreModel = {
+  design: 'pageModel'
+}
 export const WidgetType = {
   basis: 'basis',
   layout: 'layout',

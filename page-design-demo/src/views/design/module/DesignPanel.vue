@@ -60,6 +60,7 @@ import { mapGetters, mapActions } from 'vuex'
 import draggable from 'vuedraggable'
 import layoutItem from './LayoutItem.vue'
 import { generateId } from '@/utils/tools'
+import { StoreModel } from '@/constants'
 export default {
   name: 'DesignPanel',
   inheritAttrs: false,
@@ -85,10 +86,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('pageModel', ['currentSelectItem'])
+    ...mapGetters(StoreModel.design, ['currentSelectItem'])
   },
   methods: {
-    ...mapActions('pageModel', [
+    ...mapActions(StoreModel.design, [
       'upsertWidget',
       'setSelectedWidget',
       'deleteSelectedWidget',

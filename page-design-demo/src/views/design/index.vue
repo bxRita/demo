@@ -12,7 +12,7 @@
     <!-- <a-layout-header>header</a-layout-header> -->
     <a-layout class="content">
       <a-layout-sider class="left">
-        <left-component></left-component>
+        <left-main :contentStyle="contentStyle"></left-main>
       </a-layout-sider>
       <a-layout-content :style="contentStyle">
         <operate-area
@@ -32,7 +32,7 @@
         ></design-panel>
       </a-layout-content>
       <a-layout-sider width="350" class="right">
-        <right-prop-area :currentSelectItem="currentItem"></right-prop-area>
+        <right-main :currentSelectItem="currentItem"></right-main>
       </a-layout-sider>
     </a-layout>
     <!-- <a-layout-footer>copy right@2021</a-layout-footer> -->
@@ -43,19 +43,19 @@
 import { mapGetters, mapActions } from 'vuex'
 import './index.less'
 import OperateArea from './module/OperateArea.vue'
-import LeftComponent from './module/LeftComponent.vue'
 import DesignPanel from './module/DesignPanel.vue'
-import RightPropArea from './module/RightPropArea.vue'
+import RightMain from './module/right/Main.vue'
+import LeftMain from './module/left/Main.vue'
 import { cloneDeep } from 'lodash'
-import { LocalPageDataKey } from '@/constants'
+import { LocalPageDataKey, StoreModel } from '@/constants'
 export default {
   name: 'PageDesign',
   inheritAttrs: false,
   components: {
     OperateArea,
-    LeftComponent,
-    DesignPanel,
-    RightPropArea
+    LeftMain,
+    RightMain,
+    DesignPanel
   },
   props: {
     showToolbarsText: {
@@ -95,7 +95,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('pageModel', ['pageData', 'currentSelectItem']),
+    ...mapGetters(StoreModel.design, ['pageData', 'currentSelectItem']),
     designData() {
       return cloneDeep(this.pageData)
     },
@@ -109,7 +109,7 @@ export default {
     this.init()
   },
   methods: {
-    ...mapActions('pageModel', ['resetDesignPanel']),
+    ...mapActions(StoreModel.design, ['resetDesignPanel']),
     init() {
       const clientH = document.body.clientHeight,
         contentH = clientH - 3
@@ -168,6 +168,7 @@ export default {
     .ant-layout-sider {
       background: none;
       box-shadow: 0px 0px 1px 1px #ccc;
+      background: #fff;
     }
     .left,
     .right {

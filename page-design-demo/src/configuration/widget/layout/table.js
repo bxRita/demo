@@ -8,7 +8,7 @@
  * Write a description of the code here.
  */
 import layoutConfig from '@/configuration/common/layout'
-import { WidgetComponentName } from '@/constants'
+import { WidgetComponentName, StoreModel } from '@/constants'
 export const gridConfig = {
   type: layoutConfig.compType,
   key: WidgetComponentName.TABLE,
@@ -96,14 +96,14 @@ export const gridConfig = {
         // 新增行
         function addTableRow(vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('pageModel/addTableRow', {
+          vm.$store.dispatch(`${StoreModel.design}/addTableRow`, {
             widgetId: curWidget.id
           })
         }
         // 新增列
         function addTableCol(vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('pageModel/addTableCol', {
+          vm.$store.dispatch(`${StoreModel.design}/addTableCol`, {
             widgetId: curWidget.id
           })
         }

@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { WidgetComponentName } from '@/constants'
+import { WidgetComponentName, StoreModel } from '@/constants'
 import { mapActions } from 'vuex'
 import layoutMixins from '@/mixins/layoutMixins'
 export default {
@@ -88,7 +88,7 @@ export default {
     return {}
   },
   methods: {
-    ...mapActions('pageModel', ['updateWidgetProp']),
+    ...mapActions(StoreModel.design, ['updateWidgetProp']),
     changeTabEvent(val) {
       this.eventFunctionHandler('change', val)
       this.options.activeKey = val

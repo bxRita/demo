@@ -7,6 +7,7 @@
  * Task: #1
  * Write a description of the code here.
  */
+import { StoreModel } from '@/constants'
 import design from './design'
 
-export default { pageModel: design }
+export default { [StoreModel.design]: design }

@@ -7,11 +7,12 @@
  * Task: #1
  * Write a description of the code here.
  */
+import { StoreModel } from '@/constants'
 export default {
   computed: {
     // 检测当前组件的属性值 是否有更新
     needUpdate() {
-      let str = this.$store.getters['pageModel/widgetPropUpdate']
+      let str = this.$store.getters[`${StoreModel.design}/widgetPropUpdate`]
       if (str) {
         let arr = str.split('-')
         return arr

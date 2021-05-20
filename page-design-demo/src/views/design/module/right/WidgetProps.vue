@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { PageProp, WidgetProp } from './right'
+import { PageProp, WidgetProp } from './index'
 import { isEqual } from 'lodash'
 export default {
   name: 'RightPropArea',

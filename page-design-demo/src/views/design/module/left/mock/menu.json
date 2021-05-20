@@ -1,0 +1,1321 @@
+[
+  {
+    "id": "cjlwh76cp05ii0887df0xi87x",
+    "code": "welcome",
+    "name": "起始页",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "welcome",
+    "i18N": "",
+    "icon": "ios-happy",
+    "orderNo": -29,
+    "menus": []
+  },
+  {
+    "id": "cjuwd5kq52vb20721if041plk",
+    "code": "yg1a_1Guc",
+    "name": "标签管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "product/label",
+    "i18N": "",
+    "icon": "ios-barcode",
+    "orderNo": -20,
+    "menus": []
+  },
+  {
+    "id": "cjv0j8utn375x0721378rmo4f",
+    "code": "DkCkBVuYI",
+    "name": "称量管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "product/weighing",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -21,
+    "menus": [
+      {
+        "id": "cjv3dg2mp3h4k0721ot4zqf27",
+        "code": "Mjb0V7lXZ",
+        "name": "校准设置",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/calibration",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 97,
+        "menus": []
+      },
+      {
+        "id": "cjvhep1cy5r3c0721s1wyq0ar",
+        "code": "NPet9do2d",
+        "name": "砝码配置",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/weights",
+        "i18N": "",
+        "icon": "ios-apps",
+        "orderNo": 96,
+        "menus": []
+      },
+      {
+        "id": "cjvhrdj3r68830721cg9d8nrt",
+        "code": "s345P71aA",
+        "name": "清洁配置",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/clean-setting",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 95,
+        "menus": []
+      },
+      {
+        "id": "cjvm0nto26kp00721hw2jysne",
+        "code": "-Fal6TJco",
+        "name": "衡器设置",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/balance",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 98,
+        "menus": []
+      },
+      {
+        "id": "cjvzyo18n9cyr072114bv4oyq",
+        "code": "hd3fFHFtX",
+        "name": "衡器校准",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/weighing-calibration",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 99,
+        "menus": []
+      },
+      {
+        "id": "cjw5ysze59www0721rqoc76ha",
+        "code": "PJW3P302_",
+        "name": "称量工单",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/weighing",
+        "i18N": "",
+        "icon": "ios-calendar",
+        "orderNo": 100,
+        "menus": []
+      }
+    ]
+  },
+  {
+    "id": "cjwrl2ht5c4ix0721ddflixm6",
+    "code": "k41nriF2O",
+    "name": "审计管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "audit/audit-management/prescription-audit-anagement",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -18,
+    "menus": [
+      {
+        "id": "cjz949cgx7n0p0785edezky6j",
+        "code": "MSgl0Yl3a",
+        "name": "物料追踪",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "audit/audit-management/material-audit",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 84,
+        "menus": [
+          {
+            "id": "cjz94b59k7n1i0785m5hm8791",
+            "code": "q5E1pwy4b",
+            "name": "审计-物料管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/material-audit",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 98,
+            "menus": []
+          },
+          {
+            "id": "cjz94znfk7nv907858mb4w398",
+            "code": "JWZpE07IR",
+            "name": "审计-取样规则",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/sampleRule-audit",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          },
+          {
+            "id": "cjz99qeg17pju0785f8p40qjf",
+            "code": "OPFr3PQEn",
+            "name": "审计-危险防范",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/dangerPrevention-audit",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "cjzdzzp6z0bwt08028bprzklo",
+        "code": "f2m07_uEZ",
+        "name": "处方追踪",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 85,
+        "menus": [
+          {
+            "id": "cjze03c310bxl0802z89s5zc8",
+            "code": "6oqlw7m2d",
+            "name": "审计-处方管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/formula-audit",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "cjzj50ss5154m08027unio1m8",
+        "code": "T-L287gjN",
+        "name": "工厂信息追踪",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 83,
+        "menus": [
+          {
+            "id": "ck6pub9w22u2z0802i8xx8d6l",
+            "code": "aLqPD8SdK",
+            "name": "审计-企业管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/factory-info-audit/enterprise",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 93,
+            "menus": []
+          },
+          {
+            "id": "ck6q423ck2vvu0802crkn58zm",
+            "code": "MoypKY40U",
+            "name": "审计-厂区管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/factory-info-audit/site",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 94,
+            "menus": []
+          },
+          {
+            "id": "ck6q7kzbo2wlw0802mf3y6ij2",
+            "code": "wmUcPXKTM",
+            "name": "审计-区段管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/factory-info-audit/sector",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 95,
+            "menus": []
+          },
+          {
+            "id": "ck6q8pgcm2wos080221m1ikgb",
+            "code": "GcRKyOilV",
+            "name": "审计-区域管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/factory-info-audit/area",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 96,
+            "menus": []
+          },
+          {
+            "id": "ck6q8t2l52wqf0802d8mn8ie3",
+            "code": "Gnq9BiW-S",
+            "name": "审计-位置管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/factory-info-audit/location",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 97,
+            "menus": []
+          },
+          {
+            "id": "ck7d3edjj03s30789khcprw7b",
+            "code": "kEsWTJiO",
+            "name": "审计-工作中心",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/factory-info-audit/workCenter",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 98,
+            "menus": []
+          },
+          {
+            "id": "ck7d3h1pw03t50789lo4qbe8e",
+            "code": "gxO6Ze3T",
+            "name": "审计-工作站",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/factory-info-audit/workStation",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "cjzknxwg01ej70802ief6zzag",
+        "code": "Yg6YRPK8o",
+        "name": "工单追踪",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 90,
+        "menus": [
+          {
+            "id": "cjzko1ewi1env08029kapnuxl",
+            "code": "vy3qrvRRX",
+            "name": "审计-工单管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/workorder-audit",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "cjzko30qe1fce08025rdzbspr",
+        "code": "zs1uBnzR-",
+        "name": "标签追溯",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 88,
+        "menus": [
+          {
+            "id": "cjzko5aji1fcx08021o250jqc",
+            "code": "U6FlckjrZ",
+            "name": "审计-标签管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/label-audit",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          },
+          {
+            "id": "cjzrpvqmb1rnj0802w5d9h9e6",
+            "code": "LVZH-C6m9",
+            "name": "审计-标签打印",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/label-print-audit",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "ck6ssn2wu31it0802422o4c2t",
+        "code": "b0GnhIrR2",
+        "name": "库存",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 96,
+        "menus": [
+          {
+            "id": "ck6sssauj31jb0802neqtbgto",
+            "code": "Rh3NwoWey",
+            "name": "审计-库位管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/Inventory/emplacement",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 97,
+            "menus": []
+          },
+          {
+            "id": "ck6ssv7cy31kd0802kxng584w",
+            "code": "2YQd-O1ZM",
+            "name": "审计-库区管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/Inventory/zone",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 96,
+            "menus": []
+          },
+          {
+            "id": "ck6vutibw37dy0802rcch8er8",
+            "code": "lhCxRDp0G",
+            "name": "审计-库位使用",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/Inventory/emplacementUse",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 98,
+            "menus": []
+          },
+          {
+            "id": "ck8e67kv937w40789do5w2o5e",
+            "code": "ZorUeGhyh",
+            "name": "审计-托盘追溯",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/Inventory/pallent",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          },
+          {
+            "id": "ck8e6aq9c37wx0789c13b6pm6",
+            "code": "GNw7gdFj_",
+            "name": "审计-容器追溯",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/Inventory/container",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "ck7l6tj3r0j3n0789eoq05e9t",
+        "code": "bMdcU0_cs",
+        "name": "谱系追溯",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "audit/genealogy",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 97,
+        "menus": []
+      },
+      {
+        "id": "ck88c97se2x4b0789qw0yk0zh",
+        "code": "iYNekbiJ5",
+        "name": "衡器追踪",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 93,
+        "menus": [
+          {
+            "id": "ck6rn8fq72zoc0802ik9lug0c",
+            "code": "_7cQ7LqnQ",
+            "name": "审计-衡器管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/balance-manage-audit/balance",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          },
+          {
+            "id": "ck6t5obe8331n0802qajip638",
+            "code": "x0xn_6Yba",
+            "name": "审计-衡器使用",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/balance-manage-audit/balance-history",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 101,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "ck88cdz5c2xay07895r1zlr65",
+        "code": "Hoy0gA8r-",
+        "name": "MI追踪",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 98,
+        "menus": [
+          {
+            "id": "ck75ru6av3p6i0802buzemqxg",
+            "code": "EZ6cI9Md5",
+            "name": "审计-MI管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/mi-manage-audit/mi-manage",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 101,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "ck8gzrjb13gka07895yh45bfi",
+        "code": "XDpnrf8R2",
+        "name": "批次",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 89,
+        "menus": [
+          {
+            "id": "ck8gzt3ia3gkx0789seo2d16t",
+            "code": "v1HujC4B8",
+            "name": "审计-物流批次",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/lot/material-lot",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          },
+          {
+            "id": "ck8gzux543gmk0789pjzp1glx",
+            "code": "2TwK1BOHj",
+            "name": "审计-生产批次",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/lot/prduct-lot",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "ckb0d3au43pfi0789ain2ffnp",
+        "code": "fa1ja6uJC",
+        "name": "设备追踪",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 94,
+        "menus": [
+          {
+            "id": "ckb0cxrkt3pbp0789cna5u0qy",
+            "code": "YMWgS5LkQ",
+            "name": "审计-设备管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/equipment-manage-aduit/equipment",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 101,
+            "menus": []
+          },
+          {
+            "id": "ckb0d0zso3pda0789d3vwlnnl",
+            "code": "MG2F1vYmR",
+            "name": "审计-设备使用",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "audit/equipment-manage-aduit/use-equipment",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cjyfkcvju2izq0785lb9v5hgq",
+    "code": "_fioA2kkt",
+    "name": "处方管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "product/formula-manager",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -26,
+    "menus": []
+  },
+  {
+    "id": "cjypk5s1o3u7h0785zjeev7ns",
+    "code": "enQjqcY3l",
+    "name": "物料管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "product",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -28,
+    "menus": [
+      {
+        "id": "cjyfnya072oim07853wlw85ov",
+        "code": "cDu9l60s9",
+        "name": "物料管理",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/material",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 101,
+        "menus": []
+      },
+      {
+        "id": "cjypk7kkn3u7p0785k93ypw9w",
+        "code": "kUxDzhGTw",
+        "name": "取样规则",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/sample-manager",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 99,
+        "menus": []
+      },
+      {
+        "id": "cjypk8kbi3u7x07853smrf2fj",
+        "code": "OQrTHjOcS",
+        "name": "危险防范信息",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/hazard-prevention",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 100,
+        "menus": []
+      },
+      {
+        "id": "ckcldpaska1fn07899mtw559y",
+        "code": "gdd96JK3X",
+        "name": "物料属性设置",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/material-feilds-default",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 98,
+        "menus": []
+      }
+    ]
+  },
+  {
+    "id": "cjys1f8hk45om0785df3qw08v",
+    "code": "PXCYsFQ3Y",
+    "name": "数据字典",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "system/data-dictionary",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -15,
+    "menus": []
+  },
+  {
+    "id": "cjzcb33sx8ckz0785yfrjb09z",
+    "code": "eUYRyb15Y",
+    "name": "库存管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "welcome",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -20,
+    "menus": [
+      {
+        "id": "cjypk9z2j3u8d0785h9t0jo96",
+        "code": "FXgfjPGwz",
+        "name": "供应商信息",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/supplier",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 80,
+        "menus": []
+      },
+      {
+        "id": "cjzcb59xt8clo0785792viwrc",
+        "code": "_E7TC-ZsU",
+        "name": "库区",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/factory/zone",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 82,
+        "menus": []
+      },
+      {
+        "id": "cjzcb6vg58cmf0785le2i4kvq",
+        "code": "F5WL82umn",
+        "name": "库位",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/factory/emplacement",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 81,
+        "menus": []
+      },
+      {
+        "id": "ck0oq3mba5rp20802fime2x9d",
+        "code": "-MrxAf-dh",
+        "name": "托盘",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 84,
+        "menus": [
+          {
+            "id": "cjzi78kzj12km0802elj5heq7",
+            "code": "qaiUZ7S-4",
+            "name": "标准托盘",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/standardPallet",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 98,
+            "menus": []
+          },
+          {
+            "id": "cjzjkzuum1aqr0802ytrmieii",
+            "code": "cNYwSa8Fh",
+            "name": "托盘包装方式",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/palletPackingWay",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          },
+          {
+            "id": "ck06eranj3whv0802o9hu7nko",
+            "code": "cMXkJbTg0",
+            "name": "托盘管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/pallet",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          },
+          {
+            "id": "ck0oq9sox5s4w0802a8a2f46j",
+            "code": "FyU6wlcbJ",
+            "name": "托盘拆分",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/palletSplit",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 102,
+            "menus": []
+          },
+          {
+            "id": "ck0oqb1rm5s6i0802igedkldn",
+            "code": "uXhAHhyom",
+            "name": "托盘合并",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/palletMerge",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 101,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "ck0oq3yup5rpf0802zn260dhj",
+        "code": "RPX3fdgvG",
+        "name": "容器",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 83,
+        "menus": [
+          {
+            "id": "cjzi79lu612lc0802i6odv3j9",
+            "code": "QEFQKUDJX",
+            "name": "标准容器",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/standardContainer",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 98,
+            "menus": []
+          },
+          {
+            "id": "cjzwceolk23kw0802cgbsjg06",
+            "code": "fo1ylPvtP",
+            "name": "容器管理",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/container",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          },
+          {
+            "id": "cjzwefynv25gk08021j7bldn0",
+            "code": "Gi4qeTlXB",
+            "name": "容器取样",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/sampleContainer",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          },
+          {
+            "id": "ck11xsonf7na80802fwsmegbr",
+            "code": "YDiADoZY1",
+            "name": "结束容器",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/endContainer",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 101,
+            "menus": []
+          },
+          {
+            "id": "ckg31mu8z04ai0716h1whg9a2",
+            "code": "YX5nKQwTa",
+            "name": "容器合并",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/containerMerge",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 102,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "ck0oq710z5rwa0802q9gbueqo",
+        "code": "irOkjWmpF",
+        "name": "库存查询",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 79,
+        "menus": [
+          {
+            "id": "ck04urqgb3f7t08022ho1v0tm",
+            "code": "A9nXKKTHX",
+            "name": "库位物料查询",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/emplacementMaterial",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 98,
+            "menus": []
+          },
+          {
+            "id": "ck04usnvy3f870802p4ninmn3",
+            "code": "-cODa-Kty",
+            "name": "库区物料查询",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/zoneMaterial",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          },
+          {
+            "id": "ck04utyo13f8u0802p9qmhdg5",
+            "code": "omXs6CPLB",
+            "name": "库区批次查询",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/zoneLot",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          },
+          {
+            "id": "ck04uva913fa50802wvcdy02z",
+            "code": "EQX713jPG",
+            "name": "库区托盘查询",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/zonePallet",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 101,
+            "menus": []
+          },
+          {
+            "id": "ck0eowhm24t870802sxstb5pn",
+            "code": "sUffxwx-q",
+            "name": "库存查询",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/inventory",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 97,
+            "menus": []
+          },
+          {
+            "id": "ck0yyhw816suj0802b7lb1wxf",
+            "code": "JQebv_JXi",
+            "name": "区段物料查询",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/sectorMaterial",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 102,
+            "menus": []
+          },
+          {
+            "id": "ck0yyi88a6sux0802899nrwd0",
+            "code": "JuJPIAKRh",
+            "name": "区段批次查询",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/sectorLot",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 103,
+            "menus": []
+          },
+          {
+            "id": "ck0yyim486svb080257a5jtoy",
+            "code": "UBcMjj7tJ",
+            "name": "区段托盘查询",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/factory/sectorPallet",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 104,
+            "menus": []
+          }
+        ]
+      },
+      {
+        "id": "ck11xu5s67nao080290la7svn",
+        "code": "mPo0eW8Wl",
+        "name": "库位移动",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/factory/emplacementMove",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 85,
+        "menus": []
+      },
+      {
+        "id": "ck11xvgfp7nc70802e3lukjt1",
+        "code": "oihUyQJzn",
+        "name": "库存调整",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/factory/inventoryAdjustment",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 90,
+        "menus": []
+      },
+      {
+        "id": "ck11yaqd67s2e0802ocpuvv10",
+        "code": "KBYSFMm_N",
+        "name": "物料需求",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/factory/materialRequirement",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 100,
+        "menus": []
+      },
+      {
+        "id": "ck11ybdsl7s2m0802hvr8xehh",
+        "code": "Ku6pc9-Ln",
+        "name": "结束批次",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/factory/closingLot",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 101,
+        "menus": []
+      }
+    ]
+  },
+  {
+    "id": "ck01pdim92gk40802qp3h3uk8",
+    "code": "e6kgj2Gs8",
+    "name": "批次管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "lot",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -23,
+    "menus": [
+      {
+        "id": "ck01pfezf2gkv0802mkaslsq1",
+        "code": "RA-UgCgGY",
+        "name": "批次管理",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/lot-manager",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 100,
+        "menus": []
+      },
+      {
+        "id": "ck01pgj9e2gmd0802cl1mhhpt",
+        "code": "UlDEokk3E",
+        "name": "批次接收",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/lot-reception",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 99,
+        "menus": []
+      }
+    ]
+  },
+  {
+    "id": "ck14n3fav8lxh0802vl3ufv9c",
+    "code": "VJ7C4qHrm",
+    "name": "工单管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "welcome",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -21,
+    "menus": [
+      {
+        "id": "cjv1zcish3ckp0721aaquwn9w",
+        "code": "pLXTsoI58",
+        "name": "工单管理",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/work-order",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 96,
+        "menus": []
+      },
+      {
+        "id": "ck1kg34l39gma0802r5o9cm4g",
+        "code": "kj5onJl0D",
+        "name": "生产声明",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/product-declarat",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 98,
+        "menus": []
+      },
+      {
+        "id": "ck1rjany3a3dj08025p4jfvzf",
+        "code": "s-QtqFFzm",
+        "name": "产品包装方式",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/factory/productPackingWay",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 101,
+        "menus": []
+      },
+      {
+        "id": "ck6hjjxo02k1o08028sq3i7tk",
+        "code": "N55Qg7Lqb",
+        "name": "工单集中",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/work-order-focus",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 97,
+        "menus": []
+      },
+      {
+        "id": "ckb5wl0vl4qde07899a1p3sbu",
+        "code": "IG868wmZD",
+        "name": "工单包装",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/work-order/packing",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 100,
+        "menus": []
+      }
+    ]
+  },
+  {
+    "id": "ck7a4kjf13sl40802x3nqubau",
+    "code": "Ya_-BDJN_",
+    "name": "设备管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "welcome",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -18,
+    "menus": [
+      {
+        "id": "ck7a4n3zy3sm60802ad2mpyf5",
+        "code": "NqHgyy1rv",
+        "name": "属性列表",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/equipment-manager/attribute-list",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 96,
+        "menus": []
+      },
+      {
+        "id": "ck7a4p5rv3snh0802pksizuk3",
+        "code": "u1zkRyPh-",
+        "name": "设备配置",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/equipment-manager/attribute-configuration",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 98,
+        "menus": []
+      },
+      {
+        "id": "ck85iav4m2h8n0789ubudti0t",
+        "code": "GdWdMbjJw",
+        "name": "设备管理",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/equipment-manager/equipment",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 100,
+        "menus": []
+      },
+      {
+        "id": "ck86mgabw2jzz0789s4q942a6",
+        "code": "PoSzcCaDC",
+        "name": "设备类别",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/equipment-manager/equipment-category",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 97,
+        "menus": []
+      },
+      {
+        "id": "ck9868l0n1rvj07899hiyhyrm",
+        "code": "T1aOZ8ddR",
+        "name": "接口管理",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "welcome",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 99,
+        "menus": [
+          {
+            "id": "ck90nvg4l17m90789fgzb56i8",
+            "code": "ZLXgZsnx2",
+            "name": "设备类别",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/equipment-manager/interface-manager",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 99,
+            "menus": []
+          },
+          {
+            "id": "ck986du7u1rye0789kkxt3i99",
+            "code": "3YvcI8nj4",
+            "name": "设备接口",
+            "menuType": "INTERNAL",
+            "enable": true,
+            "url": "product/equipment-manager/eqp-interface-manager",
+            "i18N": "",
+            "icon": "ios-radio-button-on",
+            "orderNo": 100,
+            "menus": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ckaymrvb62cvm0789t5670u36",
+    "code": "Fi9IO0e7i",
+    "name": "生产管理",
+    "menuType": "INTERNAL",
+    "enable": true,
+    "url": "welcome",
+    "i18N": "",
+    "icon": "md-flag",
+    "orderNo": -20,
+    "menus": [
+      {
+        "id": "cjz2fh6zs6ifr0785g4npdh1r",
+        "code": "w4RvjnLIg",
+        "name": "MI执行",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/mi-excute-new",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 99,
+        "menus": []
+      },
+      {
+        "id": "cjzwesi2t26aq0802gghv2ce8",
+        "code": "2sJHJR66a",
+        "name": "批记录",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "batch-records",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 100,
+        "menus": []
+      },
+      {
+        "id": "ckbbsxias01gd0789vjia5md2",
+        "code": "iedTTHm6x",
+        "name": "批记录复核",
+        "menuType": "INTERNAL",
+        "enable": true,
+        "url": "product/batch-records-review/mi-review",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 101,
+        "menus": []
+      }
+    ]
+  },
+  {
+    "id": "ckm1nyns000570706qhzx5gwp",
+    "code": "tXuyDMpz-",
+    "name": "报表",
+    "menuType": "EXTERNAL",
+    "enable": true,
+    "url": "welcome",
+    "i18N": "",
+    "icon": "ios-radio-button-on",
+    "orderNo": -18,
+    "menus": [
+      {
+        "id": "ckm1nzk5500850706mgriui94",
+        "code": "sIzm9TQVt",
+        "name": "工单信息报表",
+        "menuType": "EXTERNAL",
+        "enable": true,
+        "url": "",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 98,
+        "menus": []
+      },
+      {
+        "id": "ckm1o0bma008d0706i9t0c8az",
+        "code": "M42EOIt3h",
+        "name": "物料耗用报表",
+        "menuType": "EXTERNAL",
+        "enable": true,
+        "url": "",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 99,
+        "menus": []
+      },
+      {
+        "id": "ckm1o12nk008o0706hrgreum6",
+        "code": "bWhkG8kSe",
+        "name": "产品产出报表",
+        "menuType": "EXTERNAL",
+        "enable": true,
+        "url": "",
+        "i18N": "",
+        "icon": "ios-radio-button-on",
+        "orderNo": 100,
+        "menus": []
+      }
+    ]
+  }
+]

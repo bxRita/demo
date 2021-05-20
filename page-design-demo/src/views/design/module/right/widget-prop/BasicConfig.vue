@@ -12,6 +12,8 @@
 import { createItem } from '@/components/widget-prop/generate-props'
 import { mapActions } from 'vuex'
 import { debounce } from '@/utils/tools'
+import { StoreModel } from '@/constants'
+
 export default {
   name: 'BasicConfig',
   inheritAttrs: false,
@@ -33,7 +35,7 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    ...mapActions('pageModel', ['updateWidgetProp']),
+    ...mapActions(StoreModel.design, ['updateWidgetProp']),
     // 属性变更 公共方法处理
     handlerData(id, type) {
       const _this = this

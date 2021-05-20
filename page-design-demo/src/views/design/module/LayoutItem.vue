@@ -8,13 +8,7 @@
   Write a description of the code here.
 -->
 <template>
-  <div
-    :class="{
-      'layout-width': ['grid', 'table', 'card', 'divider', 'html'].includes(
-        record.type
-      )
-    }"
-  >
+  <div>
     <component
       :is="currentComp"
       v-bind="$attrs"

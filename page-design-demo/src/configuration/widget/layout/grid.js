@@ -9,7 +9,7 @@
  * Write a description of the code here.
  */
 import layoutConfig from '@/configuration/common/layout'
-import { WidgetComponentName } from '@/constants'
+import { WidgetComponentName, StoreModel } from '@/constants'
 export const gridConfig = {
   type: layoutConfig.compType,
   key: WidgetComponentName.GRID,
@@ -57,7 +57,7 @@ export const gridConfig = {
             span: 12,
             list: []
           }
-          vm.$store.dispatch('pageModel/addGridCol', {
+          vm.$store.dispatch(`${StoreModel.design}/addGridCol`, {
             widgetId: curWidget.id,
             col
           })
@@ -65,7 +65,7 @@ export const gridConfig = {
         // 删除列
         function deleteGridCol(idx, vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('pageModel/deleteGridCol', {
+          vm.$store.dispatch(`${StoreModel.design}/deleteGridCol`, {
             widgetId: curWidget.id,
             colIdx: idx
           })
@@ -73,7 +73,7 @@ export const gridConfig = {
         // 更新列宽值
         function updateGridCol(val, idx, vm) {
           let curWidget = vm.currentWidget
-          vm.$store.dispatch('pageModel/updateGridColSpan', {
+          vm.$store.dispatch(`${StoreModel.design}/updateGridColSpan`, {
             widgetId: curWidget.id,
             colIdx: idx,
             val

@@ -8,6 +8,7 @@
   Write a description of the code here.
 -->
 <script>
+import { StoreModel } from '@/constants'
 import { mapActions } from 'vuex'
 import { uuid } from '@/utils/tools'
 export default {
@@ -39,7 +40,7 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    ...mapActions('pageModel', [
+    ...mapActions(StoreModel.design, [
       'addWidgetDataItem',
       'deleteWidgetDataItem',
       'updateWidgetDataItem'

@@ -141,6 +141,7 @@
 import { mapActions } from 'vuex'
 import { types } from '@/utils/tools'
 import EventSetting from './eventSetting.module'
+import { StoreModel } from '@/constants'
 
 let eventSettingIns = null
 
@@ -246,7 +247,7 @@ export default {
   },
   mounted() {},
   methods: {
-    ...mapActions('pageModel', ['updateWidgetEvent']),
+    ...mapActions(StoreModel.design, ['updateWidgetEvent']),
     init() {
       if (eventSettingIns) eventSettingIns.resetEventSetting()
 
@@ -275,8 +276,10 @@ export default {
       this.componentsEventsObj = Object.assign({}, _componentsEventsObj)
     },
     createEventListener() {
-      const { eventData, linkageEventData } =
-        eventSettingIns.createEventListener()
+      const {
+        eventData,
+        linkageEventData
+      } = eventSettingIns.createEventListener()
 
       this.eventData = eventData.slice(0)
       this.linkageEventData = linkageEventData.slice(0)
