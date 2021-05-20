@@ -2,18 +2,18 @@ const path = require('path')
 const resolve = dir => {
   return path.join(__dirname, dir)
 }
-// const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   configureWebpack: {
     devtool: 'inline-cheap-module-source-map',
     externals: {
-      // 'ant-design-vue': 'antd'
-      // vue: 'Vue',
-      // 'vue-router': 'VueRouter',
-      // vuex: 'Vuex'
-    }
-    // plugins: [new VueLoaderPlugin()]
+      vue: 'Vue',
+      'vue-router': 'VueRouter',
+      vuex: 'Vuex',
+      'ant-design-vue': 'antd'
+    },
+    plugins: [new VueLoaderPlugin()]
   },
   chainWebpack: config => {
     config.resolve.alias.set('@', resolve('src'))
@@ -25,14 +25,14 @@ module.exports = {
       .loader('graphql-tag/loader')
       .end()
 
-    // config.module
-    //   .rule('vue')
-    //   .test(/\.(vue)$/)
-    //   .use('vue-loader')
-    //   .loader('vue-loader')
-    //   .tap(options => {
-    //     return options
-    //   })
+    config.module
+      .rule('vue')
+      .test(/\.(vue)$/)
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap(options => {
+        return options
+      })
   },
   runtimeCompiler: true,
   outputDir: 'dist',

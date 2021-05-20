@@ -3,17 +3,18 @@ const resolve = dir => {
   return path.join(__dirname, dir)
 }
 
-// const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 module.exports = {
-  // configureWebpack: {
-  //   externals: isProd
-  //     ? {
-  //         vue: 'Vue',
-  //         'vue-router': 'VueRouter',
-  //         vuex: 'Vuex'
-  //       }
-  //     : {}
-  // },
+  configureWebpack: {
+    externals: isProd
+      ? {
+          // vue: 'Vue',
+          // 'vue-router': 'VueRouter',
+          // vuex: 'Vuex',
+          // 'ant-design-vue': 'antd'
+        }
+      : {}
+  },
   chainWebpack: config => {
     config.resolve.alias.set('@', resolve('src'))
     // GraphQL Loader
@@ -27,7 +28,7 @@ module.exports = {
   runtimeCompiler: true,
   outputDir: 'dist',
   devServer: {
-    port: 8080,
+    port: 8088,
     proxy: {
       '/graphql': {
         target: 'http://172.26.166.31:9199',

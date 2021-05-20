@@ -1,4 +1,5 @@
 module.exports = {
+  compact: false, //  buildmodel.umd.min.js as it exceeds the max of 500KB.
   presets: [['@vue/app', { useBuiltIns: 'entry' }], '@babel/preset-env'],
   /**
    * 为了能够在vue环境中加载module.exports导出的模块

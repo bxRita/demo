@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'PageDesignHome',
   inheritAttrs: false,
   components: {},
   data() {
@@ -25,4 +25,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped></style>

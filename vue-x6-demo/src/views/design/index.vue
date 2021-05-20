@@ -196,7 +196,7 @@ export default {
       })
 
       graph.on('cell:added', ({ cell, index, options }) => {
-        store.dispatch('design/addCell', cell.store.data)
+        store.dispatch('erModel/addCell', cell.store.data)
       })
       // 删除节点快捷键绑定
       graph.bindKey(['del', 'backspace'], () => {
