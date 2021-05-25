@@ -13,6 +13,11 @@ const routes = [
     path: '/preview',
     name: 'preview',
     component: () => import('../views/preview/index.vue')
+  },
+  {
+    path: '/template',
+    name: 'templateManager',
+    component: () => import('../views/template-manager')
   }
 ]
 

@@ -58,7 +58,7 @@
           <a-select-option
             :value="item.code"
             :key="idx"
-            v-for="(item, idx) in primaryTypes"
+            v-for="(item, idx) in primaryKeyTypes"
           >
             {{ item.name }}
           </a-select-option>
@@ -97,8 +97,6 @@
 
 <script>
 import { cloneDeep } from 'lodash'
-import { DICTIONARY_TYPE } from '@/config'
-import { getSysDictField } from '@/api/system'
 export default {
   name: 'FieldForm',
   inheritAttrs: false,
@@ -120,6 +118,10 @@ export default {
       type: Array,
       default: () => []
     },
+    primaryKeyTypes: {
+      type: Array,
+      default: () => []
+    },
     foreignTypes: {
       type: Array,
       default: () => []
@@ -128,7 +130,6 @@ export default {
   data() {
     return {
       types: [],
-      primaryTypes: [],
       relFields: [],
       visible: true,
       labelCol: { span: 4 },
@@ -180,10 +181,6 @@ export default {
       return item
     })
     this.types = basisTypes.concat(this.fieldTypes)
-
-    this.primaryTypes = await getSysDictField(
-      DICTIONARY_TYPE.BASE_MODELPRIMARY_TYPE
-    )
   },
   methods: {
     changeFieldType() {

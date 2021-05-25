@@ -28,7 +28,7 @@ import { ComponentType, color } from '@/config'
 import ConfigPanel from '@/components/config-panel/index.vue'
 const { Rect, Circle } = Shape
 import { setCurrentGraph } from '@/utils/graphUtil'
-import ToolBar from '@/components/Toolbar.vue'
+import ToolBar from '@/components/X6Toolbar.vue'
 import { getClassComponent, getEnumComponent } from '@/components/nodes'
 import { getAllModel, deleteModel } from '@/api/base'
 import { mapActions } from 'vuex'
@@ -81,8 +81,6 @@ export default {
     },
     async initGraphData() {
       let graph = this.baseGraph.graph
-      let graphData = localStorage.getItem('GRAPH_DATA_ITEM')
-      console.log('graphData :', JSON.parse(graphData))
       let arrs = await getAllModel(),
         len = arrs.length
       console.log('allModels :', arrs)

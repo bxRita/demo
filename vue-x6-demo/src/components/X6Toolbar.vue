@@ -1,5 +1,5 @@
 <!--
-  FilePath: \src\components\Toolbar.vue
+  FilePath: \src\components\X6Toolbar.vue
   Project: vue-x6-demo
   CreatedAt: 2021-04-01 10:02:26
   CreatedBy: bx (<you@you.you>)

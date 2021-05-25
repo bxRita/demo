@@ -112,6 +112,10 @@ export default {
       type: Array,
       default: () => []
     },
+    primaryTypes: {
+      type: Array,
+      default: () => []
+    },
     foreignTypes: {
       type: Array,
       default: () => []
@@ -124,6 +128,7 @@ export default {
         show: false,
         item: null,
         fieldTypes: [],
+        primaryKeyTypes: this.primaryTypes, // 主键类型
         basisTypes: this.basisTypes.length ? this.basisTypes : DEFAULT_BASIC,
         foreignTypes: this.foreignTypes.length
           ? this.foreignTypes

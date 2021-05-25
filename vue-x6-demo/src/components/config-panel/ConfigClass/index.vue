@@ -75,6 +75,7 @@ export default {
       type: '',
       fieldOp: {
         basisTypes: [],
+        primaryTypes: [],
         foreignTypes: [],
         show: false,
         fields: []
@@ -99,6 +100,9 @@ export default {
 
       this.fieldOp.basisTypes = await getSysDictField(
         DICTIONARY_TYPE.BASE_FIELD_TYPE
+      )
+      this.fieldOp.primaryTypes = await getSysDictField(
+        DICTIONARY_TYPE.BASE_MODELPRIMARY_TYPE
       )
       this.fieldOp.foreignTypes = await getSysDictField(
         DICTIONARY_TYPE.BASE_MODELREL_TYPE
