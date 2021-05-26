@@ -12,7 +12,10 @@
     <!-- <a-layout-header>header</a-layout-header> -->
     <a-layout class="content">
       <a-layout-sider class="left">
-        <left-main :contentStyle="contentStyle"></left-main>
+        <left-main
+          :contentStyle="contentStyle"
+          @menu-change="menuChangeHandle"
+        ></left-main>
       </a-layout-sider>
       <a-layout-content :style="contentStyle">
         <operate-area
@@ -47,7 +50,8 @@ import DesignPanel from './module/DesignPanel.vue'
 import RightMain from './module/right/Main.vue'
 import LeftMain from './module/left/Main.vue'
 import { cloneDeep } from 'lodash'
-import { LocalPageDataKey, StoreModel } from '@/constants'
+import { StoreModel, MenuType, DEFAULT_PAGE_DATA } from '@/constants'
+import qs from 'qs'
 export default {
   name: 'PageDesign',
   inheritAttrs: false,
@@ -76,22 +80,13 @@ export default {
   },
   data() {
     return {
-      // data: {
-      //   list: [],
-      //   config: {
-      //     layout: 'horizontal',
-      //     labelCol: { xs: 4, sm: 4, md: 4, lg: 4, xl: 4, xxl: 4 },
-      //     wrapperCol: { xs: 18, sm: 18, md: 18, lg: 18, xl: 18, xxl: 18 },
-      //     hideRequiredMark: false,
-      //     customStyle: ''
-      //   }
-      // },
       selectItem: {
         key: ''
       },
       contentStyle: {
         height: '300px'
-      }
+      },
+      currentPageInfo: ''
     }
   },
   computed: {
@@ -109,14 +104,38 @@ export default {
     this.init()
   },
   methods: {
-    ...mapActions(StoreModel.design, ['resetDesignPanel']),
+    ...mapActions(StoreModel.design, ['resetDesignPanel', 'initPageData']),
+    /**
+     * @description 左侧菜单树 切换触发事件
+     */
+    menuChangeHandle(menuItem) {
+      const { type, url } = menuItem
+      if (type == MenuType.internal) {
+        // 内部链接
+        this.getPageInfoById(url || `1`)
+      } else {
+        // 外部跳转链接
+        window.open(url)
+      }
+      console.log(menuItem)
+    },
+    async getPageInfoById(url) {
+      let res = await this.$http({
+        method: 'get',
+        url: `/page/find/${url}`
+      })
+      this.currentPageInfo = res
+      this.initPageData(
+        res.content ? JSON.parse(res.content) : DEFAULT_PAGE_DATA
+      )
+    },
     init() {
       const clientH = document.body.clientHeight,
         contentH = clientH - 3
 
       this.contentStyle.height = `${contentH}px`
     },
-    saveDataToLocal() {
+    async saveDataToLocal() {
       let cloneData = cloneDeep(this.pageData)
       // 保存的数据中 删除右侧属性栏options的配置项
       const handleOption = list => {
@@ -133,7 +152,14 @@ export default {
 
       handleOption(cloneData.list)
       // 将处理后的数据 保存到localstorage中
-      localStorage.setItem(LocalPageDataKey, JSON.stringify(cloneData))
+      const reqData = Object.assign({}, this.currentPageInfo, {
+        content: JSON.stringify(cloneData)
+      })
+      await this.$http({
+        method: 'PUT',
+        url: 'page/update',
+        data: qs.stringify({ id: 1, content: '222' })
+      })
     },
     handleSave() {
       this.saveDataToLocal()

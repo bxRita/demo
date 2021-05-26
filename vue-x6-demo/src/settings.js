@@ -8,6 +8,12 @@
  * Write a description of the code here.
  */
 module.exports = {
+  system: {
+    /**
+     * token提交给服务端时的head，与服务端交互时TOKEN本次存储和提交给服务端的Key名称
+     */
+    tokenName: process.env.VUE_APP_TOKEN_KEY_NAME || 'Authorization'
+  },
   /**
    * 服务端配置
    */

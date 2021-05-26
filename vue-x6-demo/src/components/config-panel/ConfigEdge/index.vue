@@ -110,7 +110,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { DICTIONARY_TYPE } from '@/config'
-import { getSysDictField } from '@/api/system'
+import { getSysDictField } from '@/api/er-model'
 
 import { getCurrentGraph } from '@/utils/graphUtil'
 export default {

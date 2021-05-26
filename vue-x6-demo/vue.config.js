@@ -6,6 +6,7 @@ const resolve = dir => {
 const isProd = process.env.NODE_ENV === 'production'
 module.exports = {
   configureWebpack: {
+    devtool: 'inline-cheap-module-source-map',
     externals: isProd
       ? {
           // vue: 'Vue',

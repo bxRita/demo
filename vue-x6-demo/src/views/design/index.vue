@@ -12,7 +12,11 @@
       </div>
       <!--右侧属性栏-->
       <div class="config">
-        <config-panel v-if="isReady" @selectNode="setSelectedNode" />
+        <config-panel
+          v-if="isReady"
+          @selectNode="setSelectedNode"
+          :fileName="fileName"
+        />
       </div>
     </div>
   </div>
@@ -30,7 +34,7 @@ const { Rect, Circle } = Shape
 import { setCurrentGraph } from '@/utils/graphUtil'
 import ToolBar from '@/components/X6Toolbar.vue'
 import { getClassComponent, getEnumComponent } from '@/components/nodes'
-import { getAllModel, deleteModel } from '@/api/base'
+import { getAllModel, deleteModel } from '@/api/er-model'
 import { mapActions } from 'vuex'
 
 export default {
@@ -42,6 +46,7 @@ export default {
   },
   data() {
     return {
+      fileName: '',
       isReady: false,
       baseGraph: null, // 画布对象
       resizeFn: null, // 浏览器resize函数
@@ -79,9 +84,23 @@ export default {
         pageData = graph.toJSON()
       this.initDesignCells(pageData.cells)
     },
+    getQueryVariable(variable) {
+      let query = window.location.search.substring(1)
+      let vars = query.split('&')
+      for (let i = 0; i < vars.length; i++) {
+        let pair = vars[i].split('=')
+        if (pair[0] == variable) {
+          return pair[1]
+        }
+      }
+      return false
+    },
     async initGraphData() {
+      this.fileName = this.getQueryVariable('filename')
       let graph = this.baseGraph.graph
-      let arrs = await getAllModel(),
+      let arrs = await getAllModel({
+          filename: this.fileName
+        }),
         len = arrs.length
       console.log('allModels :', arrs)
       let layoutData = {
@@ -233,10 +252,10 @@ export default {
           busData = data?.bxDatas
         if (busData && data.isSaved) {
           // 只有服务端保存的模型 才需要调服务接口
-          const { modelName, modelType } = busData
           await deleteModel({
-            modelName,
-            modelType
+            data: busData,
+            filename: this.fileName,
+            preview: false
           })
         }
       }

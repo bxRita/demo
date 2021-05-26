@@ -35,6 +35,14 @@ class PageService extends Service {
         });
         return page;
     }
+    /**
+     * @description 根据id 查询页面
+     * @param {String} id 
+     */
+    async findById(id) {
+        const page = await this.app.mysql.get('pages', { id });
+        return page;
+    }
     // 查询页面列表
     async list(po, ps) {
         // 假如 我们拿到用户 id 从数据库获取用户详细信息

@@ -44,7 +44,7 @@
           </a-select-option>
         </a-select>
       </a-form-model-item>
-      <a-form-model-item label="字段描述" prop="fieldType">
+      <a-form-model-item label="字段描述" prop="fieldDes">
         <a-input v-model="form.fieldDes" />
       </a-form-model-item>
       <a-form-model-item label="必填" prop="fieldIsNull">
@@ -91,12 +91,51 @@
           </a-select>
         </a-form-model-item>
       </template>
+      <a-form-model-item label="指令名称" prop="directType">
+        <a-select
+          v-model="form.directType"
+          placeholder="请选择"
+          @change="changeDirect"
+        >
+          <a-select-option
+            :value="item.directType"
+            :key="idx"
+            v-for="(item, idx) in directList"
+          >
+            {{ item.directType }}
+          </a-select-option>
+        </a-select>
+      </a-form-model-item>
+      <template v-if="directArgsList.length">
+        <a-form-model-item label="指令值" prop="direct">
+          <a-row>
+            <a-col :span="8"><B>directArgsType</B></a-col>
+            <a-col :span="8"><B>directKey</B></a-col>
+            <a-col :span="8"><B>directValue</B></a-col>
+          </a-row>
+          <a-row v-for="(directArg, idx) in directArgsList" :key="idx">
+            <a-col :span="8">
+              {{ directArg.directArgsType }}
+            </a-col>
+            <a-col :span="8">
+              {{ directArg.directKey }}
+            </a-col>
+            <a-col :span="8">
+              <a-input
+                v-model="directArg.directValue"
+                @change="changeDirectVal"
+              />
+            </a-col>
+          </a-row>
+        </a-form-model-item>
+      </template>
     </a-form-model>
   </a-modal>
 </template>
 
 <script>
 import { cloneDeep } from 'lodash'
+import { getDirectList } from '@/api/er-model'
 export default {
   name: 'FieldForm',
   inheritAttrs: false,
@@ -129,6 +168,8 @@ export default {
   },
   data() {
     return {
+      directList: [],
+      directArgsList: [],
       types: [],
       relFields: [],
       visible: true,
@@ -145,7 +186,9 @@ export default {
           foreignKeyType: '0',
           from: '',
           to: ''
-        }
+        },
+        directType: '',
+        direct: ''
       },
       rules: {
         fieldName: [
@@ -161,6 +204,13 @@ export default {
             message: '请输入字段类型',
             trigger: 'blur'
           }
+        ],
+        direct: [
+          {
+            required: true,
+            message: '请输入指令值',
+            trigger: 'blur'
+          }
         ]
       }
     }
@@ -173,6 +223,7 @@ export default {
     }
   },
   async mounted() {
+    this.directList = await getDirectList()
     this.form = Object.assign({}, this.form, this.item)
     const basisTypes = cloneDeep(this.basisTypes)
     // 标识基本类型
@@ -180,9 +231,27 @@ export default {
       item.isBasic = true
       return item
     })
+
+    const { direct } = this.form
     this.types = basisTypes.concat(this.fieldTypes)
+    if (direct && direct.length) {
+      this.form.directType = direct[0].directType
+      this.directArgsList = direct
+
+      let directItem = this.directList.find(
+        item => item.directType == this.form.directType
+      )
+      directItem && (directItem.directArgsList = direct)
+    }
   },
   methods: {
+    changeDirectVal(val) {
+      this.form.direct = val
+    },
+    changeDirect(directType) {
+      let direct = this.directList.find(item => item.directType == directType)
+      this.directArgsList = (direct && direct.directArgsList) || []
+    },
     changeFieldType() {
       let typeItem = this.typeItem
       // 类别类型的时候 为关联表字段
@@ -196,11 +265,33 @@ export default {
       )
     },
     handleOk() {
+      this.$refs.ruleForm.validate(valid => {
+        if (valid) {
+          this.ok()
+        } else {
+          return false
+        }
+      })
+    },
+    ok() {
       this.visible = false
       let typeItem = this.typeItem
       typeItem.isBasic && delete this.form.foreignRela
 
       console.log(this.form)
+      if (this.form.directType) {
+        let direct = this.directList.find(
+          item => item.directType == this.form.directType
+        )
+        let directArgsList = direct && direct.directArgsList
+        const directs = directArgsList.map(item => {
+          item.directType = this.form.directType
+          return item
+        })
+        this.form.direct = directs
+
+        delete this.form.directType
+      }
       this.$emit('ok', this.form)
     },
     handleCancel() {

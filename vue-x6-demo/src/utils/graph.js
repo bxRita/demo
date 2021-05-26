@@ -8,7 +8,7 @@
  * Task: #1
  * Write a description of the code here.
  */
-import { Graph, X6Node, Shape } from '@antv/x6'
+import { Graph, Node, Shape } from '@antv/x6'
 import { CellController, EventController, X6Stencil } from './index'
 import _ from 'lodash'
 // import ReactDOM from 'react-dom';
@@ -201,7 +201,7 @@ export default class X6BaseGraph {
    * @memberof X6BaseGraph
    */
   focusNodeToGraphCenter(node) {
-    if (node instanceof X6Node) {
+    if (node instanceof Node) {
       this.graph.centerCell(node)
     } else {
       const temp = this.cellController.findNodeById(node)

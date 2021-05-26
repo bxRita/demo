@@ -35,8 +35,11 @@
       </a-row>
       <a-row>
         <a-col :span="6">操作</a-col>
-        <a-col :span="8">
+        <a-col :span="6">
           <a-button type="primary" ghost @click="saveModel">保存</a-button>
+        </a-col>
+        <a-col :span="6">
+          <a-button type="primary" ghost @click="previewModel">预览</a-button>
         </a-col>
       </a-row>
     </a-tab-pane>
@@ -49,7 +52,7 @@ import FieldManager from './FieldManager'
 import { cloneDeep } from 'lodash'
 import { getCurrentGraph } from '@/utils/graphUtil'
 import { DICTIONARY_TYPE, X6CellType } from '@/config'
-import { getSysDictField } from '@/api/system'
+import { getSysDictField } from '@/api/er-model'
 import { getEdgeCommonCfg } from '@/components/nodes'
 import SaveMixins from '../saveMixins'
 export default {
@@ -91,6 +94,10 @@ export default {
     }
   },
   methods: {
+    /**
+     * @description 模型预览
+     */
+    previewModel() {},
     async init(cellData) {
       this.name = cellData.bxDatas.modelName
       this.fieldOp.fields = cellData.bxDatas.fieldsList

@@ -27,6 +27,9 @@ export default {
     ConfigClass,
     ConfigEdge
   },
+  props: {
+    fileName: String
+  },
   data() {
     return {
       curComp: ConfigGrid,
@@ -35,7 +38,8 @@ export default {
         id: '',
         cellData: null,
         graph: getCurrentGraph(),
-        globalGridAttr
+        globalGridAttr,
+        fileName: ''
       }
     }
   },
@@ -55,10 +59,12 @@ export default {
     boundEvent() {
       this.op.graph.on('blank:click', () => {
         this.type = PanelType.G
+        this.op.fileName = this.fileName
         this.op.cellData = null
         this.showAttrPanel(this.type)
       })
       this.op.graph.on('cell:click', ({ cell, view }) => {
+        this.op.fileName = this.fileName
         this.type = cell.isNode() ? PanelType.N : PanelType.E
         this.op.id = cell.id
         this.op.cellData = (cell && cell.store && cell.store.data) || null

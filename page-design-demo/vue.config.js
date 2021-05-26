@@ -48,6 +48,12 @@ module.exports = {
         https: true,
         secure: false,
         changeOrigin: true
+      },
+      '/page': {
+        target: 'http://127.0.0.1:7001',
+        https: true,
+        secure: false,
+        changeOrigin: true
       }
     }
   }

@@ -18,6 +18,36 @@ export const WidgetType = {
   chart: 'chart'
 }
 
+export const MenuType = {
+  internal: '1',
+  outside: '2'
+}
+// 初始化设计面板数据
+export const DEFAULT_PAGE_DATA = {
+  list: [], // 设计面板子元素
+  config: {
+    layout: 'horizontal',
+    labelCol: {
+      xs: 4,
+      sm: 4,
+      md: 4,
+      lg: 4,
+      xl: 4,
+      xxl: 4
+    },
+    wrapperCol: {
+      xs: 18,
+      sm: 18,
+      md: 18,
+      lg: 18,
+      xl: 18,
+      xxl: 18
+    },
+    hideRequiredMark: false,
+    customStyle: ''
+  }
+}
+
 // 保存页面设计数据到JSON中 本地KEY
 export const LocalPageDataKey = 'DESIGN_DATA'
 

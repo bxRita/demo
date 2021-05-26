@@ -7,7 +7,7 @@
  * Task: #1
  * Write a description of the code here.
  */
-import { X6Node, X6Edge } from '@antv/x6'
+import { Node, Edge } from '@antv/x6'
 import '@antv/x6-vue-shape'
 import _ from 'lodash'
 
@@ -97,7 +97,7 @@ export default class CellController {
     if (!removeNode) {
       return
     }
-    if (removeNode instanceof X6Node) {
+    if (removeNode instanceof Node) {
       this.removeNodes([removeNode])
     } else {
       const findNode = this.findNodeById(removeNode)
@@ -186,7 +186,7 @@ export default class CellController {
     if (!removeEdge) {
       return
     }
-    if (removeEdge instanceof X6Edge) {
+    if (removeEdge instanceof Edge) {
       this.graph.removeCells([removeEdge])
       this.removeEdges([removeEdge])
     } else {

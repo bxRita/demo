@@ -9,7 +9,7 @@
 -->
 <template>
   <div class="left-main" :style="contentStyle">
-    <menu-list :menus="menus"></menu-list>
+    <menu-list :menus="menus" @menuSelected="menuSelectedHandle"></menu-list>
   </div>
 </template>
 
@@ -30,14 +30,66 @@ export default {
   },
   data() {
     return {
+      menuArr: [], // 服务端 菜单 原始数据
       menus: []
     }
   },
   created() {},
   mounted() {
     this.menus = MenuData
+    this.getMenuDataFromServer()
   },
-  methods: {}
+  methods: {
+    menuSelectedHandle(args) {
+      const { key } = args
+      const res = this.menuArr.find(item => item.id == key)
+      this.$emit('menu-change', res)
+    },
+    /**
+     * @description 从服务端获取菜单数据
+     */
+    async getMenuDataFromServer() {
+      const res = await this.$http({
+        method: 'get',
+        url: '/page/menu/list'
+      })
+      this.menuArr = res
+      try {
+        this.menus = this.transArr2Tree(res)
+      } catch (e) {
+        // 服务异常使用mock服务数据
+        this.menus = MenuData
+      }
+    },
+    /**
+     * @description 将数组 转化成 页面可用的树形结构
+     */
+    transArr2Tree(arr) {
+      let len = arr.length,
+        result = [],
+        mapObj = {}
+      // 将数组中数据转为键值对结构 (这里的数组和obj会相互引用)
+      arr.map(item => {
+        mapObj[item.id] = item
+      })
+      // 执行转换
+      for (let i = 0; i < len; i++) {
+        const temp = arr[i]
+        const { parentId } = temp
+        if (!parentId) {
+          result.push(temp)
+          continue
+        }
+
+        if (mapObj[parentId].children) {
+          mapObj[parentId].children.push(temp)
+        } else {
+          mapObj[parentId].children = [temp]
+        }
+      }
+      return result
+    }
+  }
 }
 </script>
 

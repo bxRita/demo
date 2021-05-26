@@ -7,9 +7,12 @@
  * Task: #1
  * Write a description of the code here.
  */
-import { createModel, updateModel } from '@/api/base'
+import { createModel, updateModel } from '@/api/er-model'
 import { cloneDeep } from 'lodash'
 export default {
+  props: {
+    fileName: String
+  },
   methods: {
     /**
      * @description 保存模型
@@ -31,26 +34,33 @@ export default {
       if (bakCell) {
         let preName = bakCell?.bxDatas?.modelName
         console.log('preName', bakCell, preName)
-        await updateModel(
-          Object.assign(modelData, {
+        let reqData = {
+          data: Object.assign(modelData, {
             oldModelName: preName,
             modelType: cellData.cellType,
             extends: {
               saveData: [cellData]
             }
-          })
-        )
+          }),
+          filename: this.fileName,
+          preview: false
+        }
+
+        await updateModel(reqData)
       }
     },
     async createModel(modelData, cellData) {
-      await createModel(
-        Object.assign(modelData, {
+      let reqData = {
+        data: Object.assign(modelData, {
           modelType: cellData.cellType,
           extends: {
             saveData: [cellData]
           }
-        })
-      )
+        }),
+        filename: this.fileName,
+        preview: false
+      }
+      await createModel(reqData)
     }
   }
 }

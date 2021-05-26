@@ -9,7 +9,6 @@ class PageController extends Controller {
     async create() {
         const { ctx } = this;
         const {name, desc, content} = ctx.query
-        console.log(ctx.params)
         const page = await ctx.service.page.create(name, content, desc)
         ctx.body = page;
     }
@@ -19,6 +18,7 @@ class PageController extends Controller {
     async update() {
         const { ctx } = this;
         const {id, name, desc, content} = ctx.query
+        console.log(ctx.params)
         const page = await ctx.service.page.update(id, name, content, desc)
         ctx.body = page;
     }
@@ -29,6 +29,12 @@ class PageController extends Controller {
         const { ctx } = this;
         const {id} = ctx.query
         const page = await ctx.service.page.delete(id)
+        ctx.body = page;
+    }
+    async getById() {
+        const { ctx } = this;
+        const pageId = ctx.params.id;
+        const page = await ctx.service.page.findById(pageId);
         ctx.body = page;
     }
     /**

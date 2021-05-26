@@ -8,6 +8,7 @@
  * Write a description of the code here.
  */
 import {
+  INIT_PAGE_DATA,
   ADD_DESIGN_CELL,
   UPSERT_DESIGN_CELL,
   SET_SELECT_WIDGET,
@@ -26,7 +27,7 @@ import {
 import { cloneDeep } from 'lodash'
 import widgetCfg from './widget' // 设计面板右侧 grid相关属性配置修改更新
 import eventCfg from './event' // 设计面板右侧 事件相关属性配置修改更新
-import { WidgetComponentName } from '@/constants'
+import { WidgetComponentName, DEFAULT_PAGE_DATA } from '@/constants'
 
 const design = {
   namespaced: true,
@@ -60,30 +61,7 @@ const design = {
      *    ]
      * }
      */
-    pageData: {
-      list: [], // 设计面板子元素
-      config: {
-        layout: 'horizontal',
-        labelCol: {
-          xs: 4,
-          sm: 4,
-          md: 4,
-          lg: 4,
-          xl: 4,
-          xxl: 4
-        },
-        wrapperCol: {
-          xs: 18,
-          sm: 18,
-          md: 18,
-          lg: 18,
-          xl: 18,
-          xxl: 18
-        },
-        hideRequiredMark: false,
-        customStyle: ''
-      }
-    },
+    pageData: DEFAULT_PAGE_DATA,
     currentSelectItem: null,
     widgetPropUpdate: null
   },
@@ -104,6 +82,9 @@ const design = {
     ...widgetCfg.mutations,
     ...eventCfg.mutations,
     // 设计面板添加组件
+    [INIT_PAGE_DATA]: (state, payload) => {
+      state.pageData = payload === 'string' ? JSON.parse(payload) : payload
+    },
     [ADD_DESIGN_CELL]: (state, payload) => {
       state.pageData.list.push(payload)
       state.currentSelectItem = payload // 设置新增项为当前选中项
@@ -256,6 +237,9 @@ const design = {
   actions: {
     ...widgetCfg.actions,
     ...eventCfg.actions,
+    initPageData({ commit }, payload) {
+      commit(INIT_PAGE_DATA, payload)
+    },
     updateSubWidgetToLayout({ commit }, payload) {
       commit(UPDATE_SUB_WIDGET_TO_LAYOUT, payload)
     },

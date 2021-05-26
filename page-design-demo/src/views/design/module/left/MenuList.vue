@@ -17,13 +17,16 @@
     <template v-for="node in menus">
       <a-sub-menu
         :key="node.id"
+        v-if="node.children && node.children.length"
         @titleClick="titleClick"
-        v-if="node.menus && node.menus.length"
       >
         <span slot="title"
           ><span>{{ node.name }}</span></span
         >
-        <menu-list :menus="node.menus"></menu-list>
+        <menu-list
+          :menus="node.children"
+          @menuSelected="handleClick"
+        ></menu-list>
       </a-sub-menu>
 
       <a-menu-item :key="node.id" v-else>
@@ -62,11 +65,12 @@ export default {
   },
   mounted() {},
   methods: {
-    handleClick(e) {
-      console.log('click', e)
+    handleClick(arg) {
+      console.log(arg)
+      this.$emit('menuSelected', arg)
     },
     titleClick(e) {
-      console.log('titleClick', e)
+      console.log(e)
     }
   }
 }

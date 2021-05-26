@@ -10,6 +10,8 @@
 /**
  * 设计区增加组件
  */
+export const INIT_PAGE_DATA = 'INIT_PAGE_DATA'
+
 export const ADD_DESIGN_CELL = 'ADD_DESIGN_CELL'
 
 export const UPSERT_DESIGN_CELL = 'UPSERT_DESIGN_CELL'
