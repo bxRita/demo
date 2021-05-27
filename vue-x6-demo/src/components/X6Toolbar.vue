@@ -94,7 +94,19 @@
       >
       </a-button>
     </a-tooltip>
-
+    <a-tooltip placement="bottom">
+      <template #title>
+        <span>Schema预览</span>
+      </template>
+      <a-button
+        name="preview"
+        @click="handlePreview"
+        class="item-space"
+        size="small"
+        icon="eye"
+      >
+      </a-button>
+    </a-tooltip>
     <a-tooltip placement="bottom">
       <template #title>
         <span>保存PNG (Cmd + S)</span>
@@ -152,13 +164,22 @@
         toJSON
       </a-button>
     </a-tooltip>
+
+    <a-tooltip placement="bottom">
+      <template #title>
+        <span>保存</span>
+      </template>
+      <a-button name="save" @click="handleSave" class="item-space" size="small">
+        Save
+      </a-button>
+    </a-tooltip>
   </div>
 </template>
 
 <script>
 import { getCurrentGraph } from '@/utils/graphUtil'
 import { DataUri } from '@antv/x6'
-
+import { ToolCommand } from '@/config'
 export default {
   name: 'Index',
   components: {},
@@ -175,6 +196,15 @@ export default {
     }, 200)
   },
   methods: {
+    handleSave() {
+      this.$emit('command', ToolCommand.save)
+    },
+    /**
+     * @description 预览
+     */
+    handlePreview() {
+      this.$emit('command', ToolCommand.preview)
+    },
     initEvent() {
       const { history } = this.graph
       history.on('change', () => {

@@ -8,7 +8,7 @@ class PageController extends Controller {
      */
     async create() {
         const { ctx } = this;
-        const {name, desc, content} = ctx.query
+        const {name, desc, content} = ctx.request.body
         const page = await ctx.service.page.create(name, content, desc)
         ctx.body = page;
     }
@@ -17,8 +17,8 @@ class PageController extends Controller {
      */
     async update() {
         const { ctx } = this;
-        const {id, name, desc, content} = ctx.query
-        console.log(ctx.params)
+        const {id, name, desc, content} = ctx.request.body
+        // console.log(ctx.request.body)
         const page = await ctx.service.page.update(id, name, content, desc)
         ctx.body = page;
     }
@@ -27,7 +27,7 @@ class PageController extends Controller {
      */
     async delete() {
         const { ctx } = this;
-        const {id} = ctx.query
+        const {id} = ctx.request.body
         const page = await ctx.service.page.delete(id)
         ctx.body = page;
     }

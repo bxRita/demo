@@ -33,15 +33,6 @@
           ></FieldManager>
         </a-col>
       </a-row>
-      <a-row>
-        <a-col :span="6">操作</a-col>
-        <a-col :span="6">
-          <a-button type="primary" ghost @click="saveModel">保存</a-button>
-        </a-col>
-        <a-col :span="6">
-          <a-button type="primary" ghost @click="previewModel">预览</a-button>
-        </a-col>
-      </a-row>
     </a-tab-pane>
   </a-tabs>
 </template>
@@ -54,13 +45,11 @@ import { getCurrentGraph } from '@/utils/graphUtil'
 import { DICTIONARY_TYPE, X6CellType } from '@/config'
 import { getSysDictField } from '@/api/er-model'
 import { getEdgeCommonCfg } from '@/components/nodes'
-import SaveMixins from '../saveMixins'
 export default {
   name: 'ConfigClass',
   components: {
     FieldManager
   },
-  mixins: [SaveMixins],
   props: {
     id: String,
     cellData: {
@@ -68,6 +57,9 @@ export default {
       default: () => {
         return {}
       }
+    },
+    updateCellCallBack: {
+      type: Function
     }
   },
   data() {
@@ -94,15 +86,15 @@ export default {
     }
   },
   methods: {
-    /**
-     * @description 模型预览
-     */
-    previewModel() {},
+    save() {
+      this.saveModel(this.cellData)
+    },
     async init(cellData) {
       this.name = cellData.bxDatas.modelName
       this.fieldOp.fields = cellData.bxDatas.fieldsList
       this.fieldOp.fieldTypes =
         cloneDeep(this?.$store?.getters['erModel/fieldTypes']()) || []
+
       this.type = cellData.cellType
 
       this.fieldOp.basisTypes = await getSysDictField(
@@ -253,7 +245,8 @@ export default {
       this.fieldOp.show = true
     },
     updateCell() {
-      this.$store.dispatch('erModel/updateCellById', this.cellData)
+      // this.$store.dispatch('erModel/updateCellById', this.cellData)
+      this.updateCellCallBack && this.updateCellCallBack(this.cellData)
     },
     handleChangeType() {
       this.cellData.cellType = this.type

@@ -8,12 +8,7 @@
   Write a description of the code here.
 -->
 <template>
-  <a-menu
-    :default-selected-keys="defaultSelectedKeys"
-    :open-keys.sync="openKeys"
-    mode="inline"
-    @click="handleClick"
-  >
+  <a-menu mode="inline" @click="handleClick">
     <template v-for="node in menus">
       <a-sub-menu
         :key="node.id"
@@ -45,24 +40,15 @@ export default {
     menus: {
       type: Array,
       default: () => []
-    },
-    defaultSelectedKeys: {
-      type: Array,
-      default: () => []
     }
   },
   data() {
     return {
-      current: ['mail'],
-      openKeys: ['sub1']
+      current: ['mail']
     }
   },
   created() {},
-  watch: {
-    openKeys(val) {
-      console.log('openKeys', val)
-    }
-  },
+  watch: {},
   mounted() {},
   methods: {
     handleClick(arg) {

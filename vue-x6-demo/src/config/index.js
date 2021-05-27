@@ -8,6 +8,11 @@
  * Write a description of the code here.
  */
 
+// 工具栏命令
+export const ToolCommand = {
+  save: 'save',
+  preview: 'preview'
+}
 export const ComponentType = {
   E: 'ENUM', // 枚举
   C: 'TABLE', // 类

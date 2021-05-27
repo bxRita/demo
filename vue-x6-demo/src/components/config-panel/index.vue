@@ -28,7 +28,8 @@ export default {
     ConfigEdge
   },
   props: {
-    fileName: String
+    fileName: String,
+    updateCellCB: Function
   },
   data() {
     return {
@@ -39,7 +40,8 @@ export default {
         cellData: null,
         graph: getCurrentGraph(),
         globalGridAttr,
-        fileName: ''
+        fileName: '',
+        updateCellCallBack: null
       }
     }
   },
@@ -65,6 +67,7 @@ export default {
       })
       this.op.graph.on('cell:click', ({ cell, view }) => {
         this.op.fileName = this.fileName
+        this.op.updateCellCallBack = this.updateCellCB
         this.type = cell.isNode() ? PanelType.N : PanelType.E
         this.op.id = cell.id
         this.op.cellData = (cell && cell.store && cell.store.data) || null

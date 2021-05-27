@@ -86,14 +86,12 @@ export default {
       contentStyle: {
         height: '300px'
       },
-      currentPageInfo: ''
+      currentPageInfo: '',
+      designData: cloneDeep(DEFAULT_PAGE_DATA)
     }
   },
   computed: {
     ...mapGetters(StoreModel.design, ['pageData', 'currentSelectItem']),
-    designData() {
-      return cloneDeep(this.pageData)
-    },
     currentItem() {
       let curItem = this.currentSelectItem
       return cloneDeep(curItem)
@@ -125,9 +123,9 @@ export default {
         url: `/page/find/${url}`
       })
       this.currentPageInfo = res
-      this.initPageData(
-        res.content ? JSON.parse(res.content) : DEFAULT_PAGE_DATA
-      )
+      const pd = res.content ? JSON.parse(res.content) : DEFAULT_PAGE_DATA
+      this.designData = cloneDeep(pd)
+      this.initPageData(this.designData)
     },
     init() {
       const clientH = document.body.clientHeight,
@@ -158,7 +156,7 @@ export default {
       await this.$http({
         method: 'PUT',
         url: 'page/update',
-        data: qs.stringify({ id: 1, content: '222' })
+        data: reqData
       })
     },
     handleSave() {

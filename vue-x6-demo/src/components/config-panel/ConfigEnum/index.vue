@@ -45,18 +45,11 @@
           </a-button>
         </a-col>
       </a-row>
-      <a-row>
-        <a-col :span="6">操作</a-col>
-        <a-col :span="8">
-          <a-button type="primary" ghost @click="saveModel">保存</a-button>
-        </a-col>
-      </a-row>
     </a-tab-pane>
   </a-tabs>
 </template>
 
 <script>
-import SaveMixins from '../saveMixins'
 export default {
   name: 'ConfigEnum',
   props: {
@@ -71,7 +64,7 @@ export default {
       }
     }
   },
-  mixins: [SaveMixins],
+  // mixins: [SaveMixins],
   data() {
     return {
       name: '',
@@ -89,6 +82,9 @@ export default {
     this.init()
   },
   methods: {
+    save() {
+      this.saveModel(this.cellData)
+    },
     init() {
       this.name = this.cellData.bxDatas.modelName
       this.lists = this.cellData.bxDatas.fieldsList

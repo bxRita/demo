@@ -5,7 +5,11 @@
       <div class="panel">
         <!--画板顶部工具栏-->
         <div class="toolbar">
-          <tool-bar v-if="isReady" @change="changeGraph" />
+          <tool-bar
+            v-if="isReady"
+            @change="changeGraph"
+            @command="previewModel"
+          />
         </div>
         <!--中间画板区-->
         <div class="x6-graph" id="erContainer">design</div>
@@ -16,9 +20,16 @@
           v-if="isReady"
           @selectNode="setSelectedNode"
           :fileName="fileName"
+          :updateCellCB="updateCellCallBack"
         />
       </div>
     </div>
+    <component
+      :is="currentCom.name"
+      v-if="currentCom.show"
+      v-bind="currentCom.op"
+      @cancel="cancelHandle"
+    ></component>
   </div>
 </template>
 
@@ -28,15 +39,20 @@ import { Shape, FunctionExt } from '@antv/x6'
 import store from '@/store'
 import BaseGraph from '@/utils/graph'
 import './index.less'
-import { ComponentType, color } from '@/config'
+import { ComponentType, color, ToolCommand, X6CellType } from '@/config'
 import ConfigPanel from '@/components/config-panel/index.vue'
 const { Rect, Circle } = Shape
 import { setCurrentGraph } from '@/utils/graphUtil'
 import ToolBar from '@/components/X6Toolbar.vue'
 import { getClassComponent, getEnumComponent } from '@/components/nodes'
-import { getAllModel, deleteModel } from '@/api/er-model'
+import {
+  getAllModel,
+  deleteModel,
+  createModel,
+  updateModel
+} from '@/api/er-model'
 import { mapActions } from 'vuex'
-
+import PreviewSchema from './preview-schema'
 export default {
   name: 'BuildModel',
   inheritAttrs: false,
@@ -46,6 +62,14 @@ export default {
   },
   data() {
     return {
+      bakDesignCells: [],
+      currentCom: {
+        name: null,
+        show: false,
+        op: {
+          title: ''
+        }
+      },
       fileName: '',
       isReady: false,
       baseGraph: null, // 画布对象
@@ -58,7 +82,6 @@ export default {
       }
     }
   },
-  created() {},
   mounted() {
     this.initGraph()
     this.initStencil()
@@ -70,11 +93,110 @@ export default {
   methods: {
     ...mapActions('erModel', [
       'initDesignCells',
-      'bakDesignCells',
-      'setSelect'
+      'bakServerCells',
+      'setSelect',
+      'updateCellById'
     ]),
+    updateCellCallBack(cellData) {
+      this.updateCellById(cellData)
+    },
+    cancelHandle() {
+      this.currentCom.show = false
+      this.currentCom.name = null
+    },
+    previewModel(command) {
+      switch (command) {
+        case ToolCommand.save:
+          this.saveHandle()
+          break
+        case ToolCommand.preview:
+          this.currentCom.name = PreviewSchema
+          this.currentCom.show = true
+          break
+      }
+    },
     setSelectedNode(cell) {
       this.setSelect(cell)
+    },
+    async saveHandle() {
+      let graph = this.baseGraph.graph,
+        pageData = graph.toJSON()
+      const newCells = pageData.cells
+      const preCells = this.bakDesignCells
+      await this.doSaveAndUpdate(newCells, preCells)
+      this.$message.success('Save Success')
+      this.initGraphData()
+    },
+    /**
+     * @description 点击保存 执行创建，更新，删除
+     */
+    async doSaveAndUpdate(newCells, oldCells) {
+      const adds = []
+      const updates = []
+      const removes = []
+
+      const newLen = newCells.length,
+        oldLen = oldCells.length
+      for (let i = 0; i < oldLen; i++) {
+        let temp = oldCells[i]
+        let isDel = newCells.findIndex(item => item.id === temp.id) === -1
+        isDel && temp.shape != X6CellType.edge && removes.push(temp)
+      }
+      for (let i = 0; i < newLen; i++) {
+        let temp = newCells[i]
+
+        let isAdd = oldCells.findIndex(item => item.id === temp.id) === -1
+
+        temp.shape != X6CellType.edge &&
+          (isAdd ? adds.push(temp) : updates.push(temp))
+      }
+      console.log(adds, updates, removes)
+      // // 删除
+      removes.forEach(async item => {
+        const busData = item?.bxDatas
+        if (busData) {
+          // 只有服务端保存的模型 才需要调服务接口
+          await deleteModel({
+            data: busData,
+            filename: this.fileName,
+            preview: false
+          })
+        }
+      })
+      // // 新增
+      adds.forEach(async item => {
+        const modelData = cloneDeep(item.bxDatas)
+        let reqData = {
+          data: Object.assign(modelData, {
+            modelType: item.cellType,
+            extends: {
+              saveData: [item]
+            }
+          }),
+          filename: this.fileName,
+          preview: false
+        }
+        await createModel(reqData)
+      })
+      // 更新
+      updates.forEach(async item => {
+        const modelData = cloneDeep(item.bxDatas)
+        const oldItem = oldCells.find(i => i.id === item.id)
+        let preName = oldItem?.bxDatas?.modelName
+        let reqData = {
+          data: Object.assign(modelData, {
+            oldModelName: preName,
+            modelType: item.cellType,
+            extends: {
+              saveData: [item]
+            }
+          }),
+          filename: this.fileName,
+          preview: false
+        }
+
+        await updateModel(reqData)
+      })
     },
     /**
      * @description 顶部操作区 操作界面后更新graph 数据到store
@@ -130,7 +252,7 @@ export default {
         }
 
         const cells = layoutData.nodes.concat(layoutData.edges)
-        this.bakDesignCells(cloneDeep(cells))
+        this.bakDesignCells = cloneDeep(cells)
         this.initDesignCells(cells)
 
         graph.fromJSON(layoutData)
@@ -220,7 +342,6 @@ export default {
         const cells = graph.getSelectedCells()
         if (cells.length) {
           graph.removeCells(cells)
-          this.deleteModel(cells)
         }
       })
       // 撤销
@@ -241,24 +362,6 @@ export default {
       )
       graph.bindKey(['ctrl+plus'], e => this.scaleView(e, 'up'))
       graph.bindKey(['ctrl+-'], e => this.scaleView(e, 'down'))
-    },
-    /**
-     * @description 删除画布上的模型
-     */
-    async deleteModel(cells) {
-      let len = cells.length
-      for (let i = 0; i < len; i++) {
-        let data = cells[i]?.store?.data,
-          busData = data?.bxDatas
-        if (busData && data.isSaved) {
-          // 只有服务端保存的模型 才需要调服务接口
-          await deleteModel({
-            data: busData,
-            filename: this.fileName,
-            preview: false
-          })
-        }
-      }
     },
     /**
      * @description 画布放大缩小

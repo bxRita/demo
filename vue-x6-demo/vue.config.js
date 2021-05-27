@@ -25,6 +25,10 @@ module.exports = {
       .use('graphql-tag/loader')
       .loader('graphql-tag/loader')
       .end()
+    // 增加在线编辑器插件
+    config
+      .plugin('MonacoWebpackPlugin')
+      .use(require('monaco-editor-webpack-plugin'))
   },
   runtimeCompiler: true,
   outputDir: 'dist',

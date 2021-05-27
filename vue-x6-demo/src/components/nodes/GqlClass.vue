@@ -23,7 +23,12 @@ const DEFAULT = {
       fieldName: 'id',
       fieldIsNull: false,
       defaultValue: '',
-      primaryType: '2'
+      primaryType: '2',
+      direct: [
+        {
+          directType: 'id'
+        }
+      ]
     }
   ]
 }

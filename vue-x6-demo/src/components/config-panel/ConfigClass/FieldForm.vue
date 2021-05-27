@@ -232,16 +232,21 @@ export default {
       return item
     })
 
-    const { direct } = this.form
     this.types = basisTypes.concat(this.fieldTypes)
+
+    const { direct } = this.form
     if (direct && direct.length) {
       this.form.directType = direct[0].directType
-      this.directArgsList = direct
 
       let directItem = this.directList.find(
         item => item.directType == this.form.directType
       )
-      directItem && (directItem.directArgsList = direct)
+
+      this.directArgsList = directItem.directArgsList.map(item => {
+        let editVal = direct.find(i => i.directKey === item.directKey)
+        editVal && (item.directValue = editVal.directValue)
+        return item
+      })
     }
   },
   methods: {
@@ -284,10 +289,17 @@ export default {
           item => item.directType == this.form.directType
         )
         let directArgsList = direct && direct.directArgsList
-        const directs = directArgsList.map(item => {
-          item.directType = this.form.directType
-          return item
-        })
+        const directs = directArgsList.length
+          ? directArgsList.map(item => {
+              item.directType = this.form.directType
+              return item
+            })
+          : [
+              {
+                directType: this.form.directType
+              }
+            ]
+
         this.form.direct = directs
 
         delete this.form.directType
