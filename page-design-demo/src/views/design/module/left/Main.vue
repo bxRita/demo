@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { getLeftMenus } from '@/api/design'
 import MenuData from './mock/menu.json'
 import MenuList from './MenuList'
 export default {
@@ -49,10 +50,7 @@ export default {
      * @description 从服务端获取菜单数据
      */
     async getMenuDataFromServer() {
-      const res = await this.$http({
-        method: 'get',
-        url: '/page/menu/list'
-      })
+      const res = await getLeftMenus()
       this.menuArr = res
       try {
         this.menus = this.transArr2Tree(res)

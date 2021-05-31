@@ -51,7 +51,8 @@ import RightMain from './module/right/Main.vue'
 import LeftMain from './module/left/Main.vue'
 import { cloneDeep } from 'lodash'
 import { StoreModel, MenuType, DEFAULT_PAGE_DATA } from '@/constants'
-import qs from 'qs'
+import { getPageInfoById, updatePageContent } from '@/api/design'
+
 export default {
   name: 'PageDesign',
   inheritAttrs: false,
@@ -86,8 +87,7 @@ export default {
       contentStyle: {
         height: '300px'
       },
-      currentPageInfo: '',
-      designData: cloneDeep(DEFAULT_PAGE_DATA)
+      currentPageInfo: ''
     }
   },
   computed: {
@@ -95,6 +95,9 @@ export default {
     currentItem() {
       let curItem = this.currentSelectItem
       return cloneDeep(curItem)
+    },
+    designData() {
+      return cloneDeep(this.pageData)
     }
   },
   created() {},
@@ -118,14 +121,11 @@ export default {
       console.log(menuItem)
     },
     async getPageInfoById(url) {
-      let res = await this.$http({
-        method: 'get',
-        url: `/page/find/${url}`
-      })
+      let res = await getPageInfoById(url)
+
       this.currentPageInfo = res
       const pd = res.content ? JSON.parse(res.content) : DEFAULT_PAGE_DATA
-      this.designData = cloneDeep(pd)
-      this.initPageData(this.designData)
+      this.initPageData(cloneDeep(pd))
     },
     init() {
       const clientH = document.body.clientHeight,
@@ -133,7 +133,7 @@ export default {
 
       this.contentStyle.height = `${contentH}px`
     },
-    async saveDataToLocal() {
+    async saveDataToServer() {
       let cloneData = cloneDeep(this.pageData)
       // 保存的数据中 删除右侧属性栏options的配置项
       const handleOption = list => {
@@ -153,20 +153,18 @@ export default {
       const reqData = Object.assign({}, this.currentPageInfo, {
         content: JSON.stringify(cloneData)
       })
-      await this.$http({
-        method: 'PUT',
-        url: 'page/update',
-        data: reqData
-      })
+      await updatePageContent(reqData)
     },
     handleSave() {
-      this.saveDataToLocal()
+      this.saveDataToServer()
       this.$message.success('保存成功')
     },
     handlePreview() {
-      this.saveDataToLocal()
+      this.saveDataToServer()
+
+      const id = this?.currentPageInfo?.id
       // 打开预览界面
-      window.open('/preview')
+      id && window.open(`/preview/${id}`)
     },
     handleOpenImportJsonModal() {},
     handleOpenCodeModal() {},

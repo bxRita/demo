@@ -4,16 +4,16 @@
 
 <script>
 export default {
-  name: "Preview",
+  name: 'Preview',
   inheritAttrs: false,
   components: {},
   data() {
-    return {};
+    return {}
   },
   created() {},
   mounted() {},
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style lang="less" scoped></style>

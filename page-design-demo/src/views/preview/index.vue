@@ -29,8 +29,8 @@
   </div>
 </template>
 <script>
+import { getPageInfoById } from '@/api/design'
 import layoutItem from '@/views/design/module/LayoutItem.vue'
-import { LocalPageDataKey } from '@/constants'
 export default {
   name: 'Preview',
   inheritAttrs: false,
@@ -42,12 +42,18 @@ export default {
       }
     }
   },
-  mounted() {
-    let dataStr = localStorage.getItem(LocalPageDataKey)
-    this.designData = JSON.parse(dataStr)
+  async mounted() {
+    const { id } = this.$route.params
+    let res = await getPageInfoById(id)
+    this.designData = JSON.parse(res.content)
   },
   components: {
     layoutItem
   }
 }
 </script>
+<style lang="less" scoped>
+.form-panel {
+  padding: 20px;
+}
+</style>

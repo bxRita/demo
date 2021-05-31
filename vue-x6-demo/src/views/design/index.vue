@@ -49,7 +49,8 @@ import {
   getAllModel,
   deleteModel,
   createModel,
-  updateModel
+  updateModel,
+  previewAllModel
 } from '@/api/er-model'
 import { mapActions } from 'vuex'
 import PreviewSchema from './preview-schema'
@@ -90,6 +91,14 @@ export default {
     this.initGraphData()
     this.isReady = true
   },
+  watch: {
+    $route: {
+      handler(newVal, oldVal) {
+        console.log(newVal, oldVal)
+      },
+      deep: true
+    }
+  },
   methods: {
     ...mapActions('erModel', [
       'initDesignCells',
@@ -111,9 +120,37 @@ export default {
           break
         case ToolCommand.preview:
           this.currentCom.name = PreviewSchema
+          this.getPreviewData()
           this.currentCom.show = true
           break
       }
+    },
+    /**
+     * @description 根据模型获取预览schema数据
+     */
+    async getPreviewData() {
+      let graph = this.baseGraph.graph,
+        pageData = graph.toJSON()
+      const newCells = pageData.cells,
+        len = newCells.length,
+        modelList = []
+      for (let i = 0; i < len; i++) {
+        const temp = newCells[i]
+        let modelData = temp?.bxDatas
+        if (temp.shape === X6CellType.edge) continue
+        let reqData = Object.assign(modelData, {
+          modelType: temp.cellType,
+          extends: {
+            saveData: [temp]
+          }
+        })
+
+        modelList.push(reqData)
+      }
+      let schemaData = await previewAllModel({
+        modelList
+      })
+      console.log(schemaData)
     },
     setSelectedNode(cell) {
       this.setSelect(cell)

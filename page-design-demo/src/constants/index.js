@@ -48,9 +48,6 @@ export const DEFAULT_PAGE_DATA = {
   }
 }
 
-// 保存页面设计数据到JSON中 本地KEY
-export const LocalPageDataKey = 'DESIGN_DATA'
-
 export const WidgetComponentName = {
   // 基础组件
   BUTTON: 'xaButton',

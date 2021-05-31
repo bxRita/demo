@@ -169,7 +169,13 @@
       <template #title>
         <span>保存</span>
       </template>
-      <a-button name="save" @click="handleSave" class="item-space" size="small">
+      <a-button
+        icon="save"
+        name="save"
+        @click="handleSave"
+        class="item-space"
+        size="small"
+      >
         Save
       </a-button>
     </a-tooltip>

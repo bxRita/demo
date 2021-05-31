@@ -22,6 +22,19 @@ export async function getAllModel(data) {
   })
   return res.data.data
 }
+/**
+ * 模型数据预览
+ *
+ * @returns {Promise}
+ */
+export async function previewAllModel(data) {
+  const res = await fetch({
+    url: 'previewModel',
+    method: 'POST',
+    data
+  })
+  return res.data.data
+}
 
 /**
  * 删除模型
