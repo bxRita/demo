@@ -1,6 +1,6 @@
 <template>
   <a-tabs defaultActiveKey="1">
-    <a-tab-pane tab="属性" key="1">
+    <a-tab-pane tab="配置枚举" key="1">
       <a-row align="middle">
         <a-col :span="6">枚举名</a-col>
         <a-col :span="18">
@@ -62,6 +62,9 @@ export default {
           fields: []
         }
       }
+    },
+    updateCellCallBack: {
+      type: Function
     }
   },
   // mixins: [SaveMixins],
@@ -100,7 +103,7 @@ export default {
     },
     // 更新store中节点数据
     updateCell() {
-      this.$store.dispatch('erModel/updateCellById', this.cellData)
+      this.updateCellCallBack && this.updateCellCallBack(this.cellData)
     },
     /**
      * @description 修改名称事件

@@ -15,14 +15,12 @@
         <div class="x6-graph" id="erContainer">design</div>
       </div>
       <!--右侧属性栏-->
-      <div class="config">
-        <config-panel
-          v-if="isReady"
-          @selectNode="setSelectedNode"
-          :fileName="fileName"
-          :updateCellCB="updateCellCallBack"
-        />
-      </div>
+      <config-panel
+        v-if="isReady"
+        @selectNode="setSelectedNode"
+        :fileName="fileName"
+        :updateCellCB="updateCellCallBack"
+      />
     </div>
     <component
       :is="currentCom.name"
@@ -68,7 +66,8 @@ export default {
         name: null,
         show: false,
         op: {
-          title: ''
+          title: '',
+          codeContent: ''
         }
       },
       fileName: '',
@@ -91,14 +90,6 @@ export default {
     this.initGraphData()
     this.isReady = true
   },
-  watch: {
-    $route: {
-      handler(newVal, oldVal) {
-        console.log(newVal, oldVal)
-      },
-      deep: true
-    }
-  },
   methods: {
     ...mapActions('erModel', [
       'initDesignCells',
@@ -113,14 +104,14 @@ export default {
       this.currentCom.show = false
       this.currentCom.name = null
     },
-    previewModel(command) {
+    async previewModel(command) {
       switch (command) {
         case ToolCommand.save:
           this.saveHandle()
           break
         case ToolCommand.preview:
           this.currentCom.name = PreviewSchema
-          this.getPreviewData()
+          this.currentCom.op.codeContent = await this.getPreviewData()
           this.currentCom.show = true
           break
       }
@@ -139,10 +130,7 @@ export default {
         let modelData = temp?.bxDatas
         if (temp.shape === X6CellType.edge) continue
         let reqData = Object.assign(modelData, {
-          modelType: temp.cellType,
-          extends: {
-            saveData: [temp]
-          }
+          modelType: temp.cellType
         })
 
         modelList.push(reqData)
@@ -150,7 +138,7 @@ export default {
       let schemaData = await previewAllModel({
         modelList
       })
-      console.log(schemaData)
+      return schemaData
     },
     setSelectedNode(cell) {
       this.setSelect(cell)
@@ -162,7 +150,10 @@ export default {
       const preCells = this.bakDesignCells
       await this.doSaveAndUpdate(newCells, preCells)
       this.$message.success('Save Success')
-      this.initGraphData()
+      setTimeout(() => {
+        graph.clearCells()
+        this.initGraphData()
+      }, 1000)
     },
     /**
      * @description 点击保存 执行创建，更新，删除
@@ -261,7 +252,6 @@ export default {
           filename: this.fileName
         }),
         len = arrs.length
-      console.log('allModels :', arrs)
       let layoutData = {
         nodes: [],
         edges: []
@@ -489,8 +479,8 @@ export default {
      */
     getContainerSize() {
       return {
-        width: document.body.offsetWidth - 610,
-        height: document.body.offsetHeight - 50
+        width: document.body.offsetWidth - 290,
+        height: document.body.offsetHeight - 40
       }
     },
     /**

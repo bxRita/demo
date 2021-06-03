@@ -10,7 +10,7 @@
  */
 import { Graph, Node, Shape } from '@antv/x6'
 import { CellController, EventController, X6Stencil } from './index'
-import _ from 'lodash'
+import { isEqual } from 'lodash'
 // import ReactDOM from 'react-dom';
 
 export default class X6BaseGraph {
@@ -273,7 +273,7 @@ export default class X6BaseGraph {
         removeNodes.push(node)
       } else {
         // !!! 目前仅支持节点data数据变化, 才认为更新
-        if (_.isEqual(node.data, findNodeData.data)) {
+        if (isEqual(node.data, findNodeData.data)) {
           retainNodes.push(node)
         } else {
           updateNodes.push(node)
@@ -304,7 +304,7 @@ export default class X6BaseGraph {
         removeEdges.push(edge)
       } else {
         // !!! 目前仅支持连线data数据变化, 才认为更新
-        if (_.isEqual(edge.data, findEdgeData.data)) {
+        if (isEqual(edge.data, findEdgeData.data)) {
           retainEdges.push(edge)
         } else {
           updateEdges.push(edge)

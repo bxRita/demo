@@ -1,6 +1,6 @@
 /*
  * FilePath: \src\api\fetch.js
- * Project: page-design-demo
+ * Project: vue-x6-demo
  * CreatedAt: 2021-05-26 11:08:44
  * CreatedBy: ABC (<you@you.you>)
  * Copyright: (c) 2021

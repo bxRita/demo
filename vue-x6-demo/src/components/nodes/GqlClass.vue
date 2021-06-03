@@ -13,24 +13,12 @@
 
 <script>
 import globalStore from '@/store'
+import { CLASS_DEFAULT_VAL } from '@/config'
 // 组件默认展示值
 const DEFAULT = {
   modelName: '实体类',
   modelType: 'Class',
-  fieldsList: [
-    {
-      fieldType: 'String',
-      fieldName: 'id',
-      fieldIsNull: false,
-      defaultValue: '',
-      primaryType: '2',
-      direct: [
-        {
-          directType: 'id'
-        }
-      ]
-    }
-  ]
+  fieldsList: CLASS_DEFAULT_VAL
 }
 export default {
   name: 'GqlClass',

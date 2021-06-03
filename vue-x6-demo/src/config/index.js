@@ -8,6 +8,25 @@
  * Write a description of the code here.
  */
 
+export const CLASS_DEFAULT_VAL = [
+  {
+    fieldType: 'String',
+    fieldName: 'id',
+    fieldIsNull: false,
+    defaultValue: '',
+    primaryType: '2',
+    direct: [
+      {
+        directType: 'id'
+      }
+    ]
+  }
+]
+
+export const ENUM_DEFAULT_VAL = [
+  { fieldName: 'Y', fieldType: 'String', primaryType: '0' },
+  { fieldName: 'N', fieldType: 'String', primaryType: '0' }
+]
 // 工具栏命令
 export const ToolCommand = {
   save: 'save',

@@ -10,14 +10,11 @@
 
 <script>
 import globalStore from '@/store'
-
+import { ENUM_DEFAULT_VAL } from '@/config'
 // 组件默认展示值
 const DEFAULT = {
   modelName: '枚举',
-  fieldsList: [
-    { fieldName: 'Y', fieldType: 'String', primaryType: '0' },
-    { fieldName: 'N', fieldType: 'String', primaryType: '0' }
-  ]
+  fieldsList: ENUM_DEFAULT_VAL
 }
 
 export default {

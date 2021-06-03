@@ -1,0 +1,14 @@
+{
+  "common": {
+    "required": "必填"
+  },
+  "product": {
+    "model": {
+      "config": {
+        "fieldName": "字段名称",
+        "fieldType": "字段类型",
+        "fieldDesc": "字段描述"
+      }
+    }
+  }
+}

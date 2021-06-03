@@ -1,6 +1,6 @@
 <!--
   FilePath: \src\views\design\preview-schema\preview-schema.vue
-  Project: page-design-demo
+  Project: vue-x6-demo
   CreatedAt: 2021-05-27 11:21:50
   CreatedBy: ABC (<you@you.you>)
   Copyright: (c) 2021

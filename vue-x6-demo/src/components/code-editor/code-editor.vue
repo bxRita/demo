@@ -1,6 +1,6 @@
 <!--
   FilePath: \src\components\code-editor\code-editor.vue
-  Project: page-design-demo
+  Project: vue-x6-demo
   CreatedAt: 2021-05-27 11:32:58
   CreatedBy: ABC (<you@you.you>)
   Copyright: (c) 2021

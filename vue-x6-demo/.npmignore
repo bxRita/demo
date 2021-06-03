@@ -1,0 +1,11 @@
+.*
+/node_modules
+/src
+/public
+package-lock.json
+yarn.lock
+babel.config.js
+postcss.config.js
+vue.config.js
+index.html
+*.md

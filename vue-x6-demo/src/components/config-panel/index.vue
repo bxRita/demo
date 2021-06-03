@@ -1,11 +1,20 @@
 <template>
-  <div class="config">
-    <component :is="curComp" v-bind="op" v-if="curComp" ref="configPanel" />
-  </div>
+  <a-drawer
+    placement="right"
+    :closable="false"
+    width="290"
+    :mask="false"
+    :visible="visible"
+    @close="onClose"
+  >
+    <div class="config">
+      <component :is="curComp" v-bind="op" v-if="curComp" ref="configPanel" />
+    </div>
+  </a-drawer>
 </template>
 
 <script>
-import ConfigGrid from './ConfigGrid/index.vue'
+// import ConfigGrid from './ConfigGrid/index.vue'
 import ConfigEnum from './ConfigEnum/index.vue'
 import ConfigClass from './ConfigClass/index.vue'
 import ConfigEdge from './ConfigEdge/index.vue'
@@ -22,7 +31,7 @@ const PanelType = {
 export default {
   name: 'Index',
   components: {
-    ConfigGrid,
+    // ConfigGrid,
     ConfigEnum,
     ConfigClass,
     ConfigEdge
@@ -33,7 +42,8 @@ export default {
   },
   data() {
     return {
-      curComp: ConfigGrid,
+      visible: false,
+      curComp: null,
       type: PanelType.G,
       op: {
         id: '',
@@ -51,6 +61,9 @@ export default {
     }, 200)
   },
   watch: {
+    curComp(val) {
+      this.visible = !!val
+    },
     type(newVal, oldVal) {
       if (newVal != oldVal) {
         this.$emit('selectNode', this.op.cellData)
@@ -58,6 +71,10 @@ export default {
     }
   },
   methods: {
+    onClose() {
+      this.visible = false
+      this.curComp = null
+    },
     boundEvent() {
       this.op.graph.on('blank:click', () => {
         this.type = PanelType.G
@@ -77,7 +94,8 @@ export default {
     showAttrPanel(type, subType) {
       switch (type) {
         case PanelType.G:
-          this.curComp = ConfigGrid
+          // this.curComp = ConfigGrid
+          this.curComp = null
           break
         case PanelType.N:
           if (subType == ComponentType.E) {
@@ -90,12 +108,11 @@ export default {
           this.curComp = ConfigEdge
           break
         default:
-          this.curComp = ConfigGrid
+          // this.curComp = ConfigGrid
+          this.curComp = null
           break
       }
     }
   }
 }
 </script>
-
-<style lang="less" scoped></style>

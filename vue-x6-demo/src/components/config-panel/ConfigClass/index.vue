@@ -1,6 +1,6 @@
 <template>
   <a-tabs defaultActiveKey="1">
-    <a-tab-pane tab="实体类配置" key="1">
+    <a-tab-pane tab="配置实体类" key="1">
       <a-row align="middle">
         <a-col :span="6">名称</a-col>
         <a-col :span="18">
@@ -112,11 +112,9 @@ export default {
      */
     fieldManagerOk(fields) {
       this.fieldOp.show = false
-      this.handlerEdgeConnect(
-        cloneDeep(this.cellData.bxDatas.fieldsList),
-        fields
-      )
+      this.handlerEdgeConnect(this.cellData.bxDatas.fieldsList, fields)
       this.cellData.bxDatas.fieldsList = fields
+      this.fieldOp.fields = fields
       this.updateCell(this.cellData)
     },
     /**
@@ -130,7 +128,8 @@ export default {
      */
     handlerEdgeConnect(preFields, newFields) {
       let toDel = [],
-        toAdd = []
+        toAdd = [],
+        toUpdate = []
       const preLen = preFields.length,
         newLen = newFields.length
       // 找出被删除的关联关系
@@ -156,10 +155,21 @@ export default {
         // 旧列表  1. 没有这个字段  2. 有这个字段 但是 类型不一样
         if (!newIsBasic && (!oldItem || oldItem.fieldType !== temp.fieldType)) {
           toAdd.push(temp)
+          continue
+        }
+
+        // 更新 关联关系 需满足
+        // 字段类型不是基本类型 有关联关系 ,且关联 类型一致， 但是 外键关系不一致
+        if (
+          !newIsBasic &&
+          oldItem.foreignRela.foreignKeyType !== temp.foreignRela.foreignKeyType
+        ) {
+          toUpdate.push(temp)
         }
       }
       console.log('toDel: ', toDel)
       console.log('toAdd: ', toAdd)
+      console.log('toUpdate: ', toUpdate)
       // 在画布上增加连线
       const addLen = toAdd.length
       if (addLen) {
@@ -194,9 +204,8 @@ export default {
               }
             }
           )
-          temp.extends = cloneDeep(edgeCfg)
           let edge = new Shape.Edge(edgeCfg)
-
+          temp.extends = cloneDeep(edge.store.data)
           this.graph.addEdge(edge)
         }
       }
@@ -211,6 +220,22 @@ export default {
           curEdge && this.graph.removeEdge(curEdge.id)
 
           temp.extends = null
+        }
+      }
+
+      // 更新画布连线
+      const upLen = toUpdate.length
+      if (upLen) {
+        for (let j = 0; j < upLen; j++) {
+          let temp = toUpdate[j]
+          let keyType = temp.foreignRela.foreignKeyType
+          let curCell = this.graph.getCellById(temp.extends.id)
+
+          const forKeyDetail = this.fieldOp.foreignTypes.find(
+            item => item.code === keyType
+          )
+          temp.extends.bxDatas.relType = keyType
+          curCell.appendLabel(forKeyDetail?.name)
         }
       }
     },
@@ -245,7 +270,6 @@ export default {
       this.fieldOp.show = true
     },
     updateCell() {
-      // this.$store.dispatch('erModel/updateCellById', this.cellData)
       this.updateCellCallBack && this.updateCellCallBack(this.cellData)
     },
     handleChangeType() {

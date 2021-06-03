@@ -8,7 +8,13 @@
  * Write a description of the code here.
  */
 import DefConfig from './common'
-import { color, ComponentType, X6CellType } from '@/config'
+import {
+  color,
+  ComponentType,
+  X6CellType,
+  CLASS_DEFAULT_VAL,
+  ENUM_DEFAULT_VAL
+} from '@/config'
 import GqlClass from './GqlClass.vue'
 import GqlEnum from './GqlEnum.vue'
 /**
@@ -82,15 +88,7 @@ export function getClassNode(graph, options) {
         modelName: 'table',
         modelType: ComponentType.C,
         modelDesc: '',
-        fieldsList: [
-          {
-            fieldType: 'String',
-            fieldName: 'id',
-            fieldIsNull: false,
-            defaultValue: '',
-            primaryType: '2'
-          }
-        ]
+        fieldsList: CLASS_DEFAULT_VAL
       },
       component: getClassComponent()
     })
@@ -112,10 +110,7 @@ export function getEnumNode(graph, options) {
         modelName: 'enum',
         modelType: ComponentType.E,
         modelDesc: '',
-        fieldsList: [
-          { fieldName: 'Y', fieldType: 'String', primaryType: '0' },
-          { fieldName: 'N', fieldType: 'String', primaryType: '0' }
-        ]
+        fieldsList: ENUM_DEFAULT_VAL
       },
       component: getEnumComponent()
     })

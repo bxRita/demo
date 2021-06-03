@@ -1,6 +1,6 @@
 <template>
   <a-tabs defaultActiveKey="1">
-    <a-tab-pane tab="关联关系配置" key="1">
+    <a-tab-pane tab="关联关系" key="1">
       <a-row>
         <a-col><b>基本信息</b></a-col>
       </a-row>
@@ -29,6 +29,7 @@
             v-model="cellModel.targetField"
             style="width: 100%"
             @change="changeTarget"
+            disabled
           >
             <a-select-option
               :key="idx"
@@ -48,6 +49,7 @@
             placeholder="请选择"
             style="width: 100%"
             @change="onRelType"
+            disabled
           >
             <a-select-option
               :value="item.code"
@@ -59,7 +61,7 @@
         </a-col>
       </a-row>
 
-      <a-row>
+      <!-- <a-row>
         <a-col><b>线条设置</b></a-col>
       </a-row>
       <a-row align="middle">
@@ -102,7 +104,7 @@
             <a-select-option value="jumpover">Jumpover</a-select-option>
           </a-select>
         </a-col>
-      </a-row>
+      </a-row> -->
     </a-tab-pane>
   </a-tabs>
 </template>
@@ -125,6 +127,9 @@ export default {
       type: String,
       default: null,
       require: true
+    },
+    updateCellCallBack: {
+      type: Function
     }
   },
   data() {
@@ -183,9 +188,11 @@ export default {
       this.relTypes = await getSysDictField(DICTIONARY_TYPE.BASE_MODELREL_TYPE)
     },
     updateCell() {
-      this.updateCellById(this.curCell)
+      const curCellData = this.curCell.store.data,
+        data = curCellData?.bxDatas
+      this.updateCellById(curCellData)
       // 更新连线所在节点的相关数据
-      this.updateRelateNodeCell(this.curCell.store.data?.bxDatas)
+      this.updateRelateNodeCell(data)
     },
     onStrokeWidthChange(val) {
       this.globalGridAttr.strokeWidth = val

@@ -22,10 +22,16 @@
       :label-col="labelCol"
       :wrapper-col="wrapperCol"
     >
-      <a-form-model-item label="字段名称" prop="fieldName">
+      <a-form-model-item
+        :label="$t('product.model.config.fieldName')"
+        prop="fieldName"
+      >
         <a-input v-model="form.fieldName" />
       </a-form-model-item>
-      <a-form-model-item label="字段类型" prop="fieldType">
+      <a-form-model-item
+        :label="$t('product.model.config.fieldType')"
+        prop="fieldType"
+      >
         <a-select
           v-model="form.fieldType"
           placeholder="请选择字段类型"
@@ -44,10 +50,13 @@
           </a-select-option>
         </a-select>
       </a-form-model-item>
-      <a-form-model-item label="字段描述" prop="fieldDes">
+      <a-form-model-item
+        :label="$t('product.model.config.fieldDesc')"
+        prop="fieldDes"
+      >
         <a-input v-model="form.fieldDes" />
       </a-form-model-item>
-      <a-form-model-item label="必填" prop="fieldIsNull">
+      <a-form-model-item :label="$t('common.required')" prop="fieldIsNull">
         <a-switch v-model="form.fieldIsNull" />
       </a-form-model-item>
       <a-form-model-item label="默认值" prop="defaultValue">

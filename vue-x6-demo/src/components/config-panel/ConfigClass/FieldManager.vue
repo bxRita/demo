@@ -136,22 +136,22 @@ export default {
       },
       columns: [
         {
-          title: '字段名称',
+          title: this.$t('product.model.config.fieldName'),
           dataIndex: 'fieldName',
           key: 'fieldName'
         },
         {
-          title: '字段类型',
+          title: this.$t('product.model.config.fieldType'),
           dataIndex: 'fieldType',
           key: 'fieldType'
         },
         {
-          title: '字段描述',
+          title: this.$t('product.model.config.fieldDesc'),
           dataIndex: 'fieldDes',
           key: 'fieldDes'
         },
         {
-          title: '必填',
+          title: this.$t('common.required'),
           dataIndex: 'fieldIsNull',
           key: 'fieldIsNull',
           scopedSlots: { customRender: 'fieldIsNull' }

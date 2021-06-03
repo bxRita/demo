@@ -9,7 +9,7 @@
  */
 import { Node, Edge } from '@antv/x6'
 import '@antv/x6-vue-shape'
-import _ from 'lodash'
+import { find, isEqual, pullAll, size } from 'lodash'
 
 const x6VueShape = 'vue-shape'
 
@@ -68,7 +68,7 @@ export default class CellController {
    */
   updateNode(node, newNodeData) {
     // !!! 现在仅支持data数据不一致才认为更新
-    if (!_.isEqual(node.data, newNodeData.data)) {
+    if (!isEqual(node.data, newNodeData.data)) {
       // 重设节点数据, 触发x6更新节点逻辑
       node.setData(newNodeData.data)
       // node.setPosition(newNodeData.x, newNodeData.y)
@@ -82,9 +82,9 @@ export default class CellController {
    * @memberof CellController
    */
   removeNodes(removeNodes) {
-    if (_.size(removeNodes) > 0) {
+    if (size(removeNodes) > 0) {
       this.graph.removeCells(removeNodes)
-      this.nodes = _.pullAll(this.nodes, removeNodes)
+      this.nodes = pullAll(this.nodes, removeNodes)
     }
   }
 
@@ -129,8 +129,8 @@ export default class CellController {
   addEdge(edgeData) {
     const { id, source, target, data, ...rest } = edgeData
 
-    const sourceNode = _.find(this.nodes, node => node.id === source)
-    const targetNode = _.find(this.nodes, node => node.id === target)
+    const sourceNode = find(this.nodes, node => node.id === source)
+    const targetNode = find(this.nodes, node => node.id === target)
     if (!source || !target) {
       throw new Error('edge must has source and target!')
     }
@@ -162,7 +162,7 @@ export default class CellController {
    */
   updateEdge(edge, newEdgeData) {
     // !!! 现在仅支持data数据不一致才认为更新, 需要扩展
-    if (!_.isEqual(edge.data, newEdgeData.data)) {
+    if (!isEqual(edge.data, newEdgeData.data)) {
       edge.setData(newEdgeData.data)
     }
   }
@@ -174,7 +174,7 @@ export default class CellController {
    */
   removeEdges(removeEdges) {
     this.graph.removeCells(removeEdges)
-    this.edges = _.pullAll(this.edges, removeEdges)
+    this.edges = pullAll(this.edges, removeEdges)
   }
 
   /**
