@@ -4,7 +4,15 @@
       <a-list item-layout="horizontal" :data-source="bxData.fieldsList">
         <a-list-item slot="renderItem" slot-scope="item">
           <b>{{ item.fieldName }}</b>
-          <span slot="actions">{{ item.fieldType }}</span>
+          <span slot="actions">
+            <span v-if="isAssociateType(item)"
+              >[<span style="color: #5f95ff">{{ item.fieldType }}</span
+              >]</span
+            >
+            <span v-else>{{ item.fieldType }}</span>
+
+            <b v-if="item.fieldIsNull" style="color: red">!</b></span
+          >
         </a-list-item>
       </a-list>
     </a-card>
@@ -13,7 +21,7 @@
 
 <script>
 import globalStore from '@/store'
-import { CLASS_DEFAULT_VAL } from '@/config'
+import { CLASS_DEFAULT_VAL, PrimaryType, BASE_MODELREL_TYPE } from '@/config'
 // 组件默认展示值
 const DEFAULT = {
   modelName: '实体类',
@@ -43,6 +51,18 @@ export default {
     },
     title() {
       return this.bxData.modelName
+    },
+    // 是否是关联关系类型
+    isAssociateType() {
+      return function (item) {
+        const { primaryType, foreignRela } = item
+        if (!foreignRela) return false
+        return (
+          primaryType === PrimaryType.R &&
+          (foreignRela.foreignKeyType === BASE_MODELREL_TYPE.ONE2MUL.code ||
+            foreignRela.foreignKeyType === BASE_MODELREL_TYPE.MUL2MUL.code)
+        )
+      }
     }
   },
   created() {},
@@ -78,6 +98,7 @@ div.enum {
       min-height: 35px;
       .ant-list-item {
         padding: 1px 0;
+        border: 0;
         .ant-list-item-action {
           margin: 0 5px 0 0;
           li {

@@ -75,7 +75,7 @@ const DEFAULT_BASIC = [
   }
 ]
 // 默认外键类型
-const DEFAULT_FOREIGN = [
+const MODELREL_TYPE = [
   {
     code: '0',
     name: '没有关联关系'
@@ -132,7 +132,7 @@ export default {
         basisTypes: this.basisTypes.length ? this.basisTypes : DEFAULT_BASIC,
         foreignTypes: this.foreignTypes.length
           ? this.foreignTypes
-          : DEFAULT_FOREIGN
+          : MODELREL_TYPE
       },
       columns: [
         {
@@ -227,5 +227,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>

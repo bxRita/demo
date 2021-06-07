@@ -43,7 +43,7 @@
         >
           <a-select-option
             :value="item.code"
-            :key="idx"
+            :key="idx + item.code"
             v-for="(item, idx) in types"
           >
             {{ item.code }}
@@ -66,14 +66,14 @@
         <a-select v-model="form.primaryType" placeholder="请选择主键类型">
           <a-select-option
             :value="item.code"
-            :key="idx"
+            :key="item.code + idx"
             v-for="(item, idx) in primaryKeyTypes"
           >
             {{ item.name }}
           </a-select-option>
         </a-select>
       </a-form-model-item>
-      <template v-if="!typeItem.isBasic">
+      <template v-if="isAssociateType && !typeItem.isBasic">
         <a-form-model-item label="模型关联类型" prop="foreignKeyType">
           <a-select
             v-model="form.foreignRela.foreignKeyType"
@@ -81,7 +81,7 @@
           >
             <a-select-option
               :value="item.code"
-              :key="idx"
+              :key="idx + item.code + item.name"
               v-for="(item, idx) in foreignTypes"
             >
               {{ item.name }}
@@ -92,7 +92,7 @@
           <a-select v-model="form.foreignRela.to" placeholder="请选择">
             <a-select-option
               :value="item.fieldName"
-              :key="idx"
+              :key="idx + item.fieldName"
               v-for="(item, idx) in relFields"
             >
               {{ item.fieldName }}
@@ -108,7 +108,7 @@
         >
           <a-select-option
             :value="item.directType"
-            :key="idx"
+            :key="item.directType + idx"
             v-for="(item, idx) in directList"
           >
             {{ item.directType }}
@@ -118,22 +118,45 @@
       <template v-if="directArgsList.length">
         <a-form-model-item label="指令值" prop="direct">
           <a-row>
-            <a-col :span="8"><B>directArgsType</B></a-col>
-            <a-col :span="8"><B>directKey</B></a-col>
-            <a-col :span="8"><B>directValue</B></a-col>
+            <a-col :span="6"><B>directArgsType</B></a-col>
+            <a-col :span="6"><B>directKey</B></a-col>
+            <a-col :span="6"><B>directDesc</B></a-col>
+            <a-col :span="6"><B>directValue</B></a-col>
           </a-row>
-          <a-row v-for="(directArg, idx) in directArgsList" :key="idx">
-            <a-col :span="8">
+          <a-row
+            v-for="(directArg, idx) in directArgsList"
+            :key="directArg.directDesc + idx"
+          >
+            <a-col :span="6">
               {{ directArg.directArgsType }}
             </a-col>
-            <a-col :span="8">
+            <a-col :span="6">
               {{ directArg.directKey }}
             </a-col>
-            <a-col :span="8">
+            <a-col :span="6">
+              {{ directArg.directDesc }}
+            </a-col>
+            <a-col :span="6">
               <a-input
+                v-if="!isDictionary"
                 v-model="directArg.directValue"
                 @change="changeDirectVal"
               />
+              <a-select
+                v-else
+                :key="directArg.directArgsType + idx"
+                v-model="directArg.directValue"
+                @change="changeDirectVal"
+              >
+                <a-select-option
+                  :value="d.directValue"
+                  :key="d.directDesc + '_' + d.directValue"
+                  :title="d.directDesc"
+                  v-for="d in directValueList"
+                >
+                  {{ d.directDesc }}
+                </a-select-option>
+              </a-select>
             </a-col>
           </a-row>
         </a-form-model-item>
@@ -144,7 +167,9 @@
 
 <script>
 import { cloneDeep } from 'lodash'
-import { getDirectList } from '@/api/er-model'
+import { getDirectList, getDictionaryValus } from '@/api/er-model'
+import { PrimaryType } from '@/config'
+const DICTIONARY = 'dictionary' // 数据字典类型
 export default {
   name: 'FieldForm',
   inheritAttrs: false,
@@ -183,14 +208,15 @@ export default {
       relFields: [],
       visible: true,
       labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
+      wrapperCol: { span: 20 },
+      directValueList: [],
       form: {
         fieldName: '',
         fieldType: 'String',
         fieldDes: '',
         fieldIsNull: false,
         defaultValue: '',
-        primaryType: '0',
+        primaryType: PrimaryType.B,
         foreignRela: {
           foreignKeyType: '0',
           from: '',
@@ -229,9 +255,16 @@ export default {
       let fieldType = this.form.fieldType
       const typeItem = this.types.find(item => item.code === fieldType)
       return (typeItem && (typeItem.isBasic ? typeItem : typeItem.data)) || {}
+    },
+    isDictionary() {
+      return this.form.directType === DICTIONARY
+    },
+    isAssociateType() {
+      return this.form.primaryType === PrimaryType.R
     }
   },
   async mounted() {
+    this.directValueList = await getDictionaryValus() // 数据字典所有项值
     this.directList = await getDirectList()
     this.form = Object.assign({}, this.form, this.item)
     const basisTypes = cloneDeep(this.basisTypes)
@@ -262,7 +295,7 @@ export default {
     changeDirectVal(val) {
       this.form.direct = val
     },
-    changeDirect(directType) {
+    async changeDirect(directType) {
       let direct = this.directList.find(item => item.directType == directType)
       this.directArgsList = (direct && direct.directArgsList) || []
     },
@@ -310,9 +343,9 @@ export default {
             ]
 
         this.form.direct = directs
-
-        delete this.form.directType
       }
+      delete this.form.directType
+      console.log('field: ', this.form)
       this.$emit('ok', this.form)
     },
     handleCancel() {
@@ -322,5 +355,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>

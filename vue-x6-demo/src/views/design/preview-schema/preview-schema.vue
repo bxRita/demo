@@ -63,7 +63,7 @@ export default {
 ::v-deep .ant-modal-body {
   .code-editor {
     .monaco-editor {
-      min-height: 450px;
+      min-height: 600px;
     }
   }
 }

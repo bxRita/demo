@@ -8,16 +8,67 @@
  * Write a description of the code here.
  */
 
+export const PrimaryType = {
+  B: '0', // 基础数据类型
+  R: '1', // 关联关系类型
+  U: '2' // 唯一主键类型
+}
+
+// 默认外键类型
+export const BASE_MODELREL_TYPE = {
+  NONE: {
+    code: '0',
+    name: '没有关联关系'
+  },
+  ONE2ONE: {
+    code: '1',
+    name: '一对一关联关系'
+  },
+  ONE2MUL: {
+    code: '2',
+    name: '一对多关联关系'
+  },
+  MUL2MUL: {
+    code: '3',
+    name: '多对多关联关系'
+  }
+}
+
+// 类型默认字段
 export const CLASS_DEFAULT_VAL = [
   {
-    fieldType: 'String',
+    fieldType: 'ID',
     fieldName: 'id',
     fieldIsNull: false,
     defaultValue: '',
-    primaryType: '2',
+    primaryType: PrimaryType.U,
     direct: [
       {
         directType: 'id'
+      }
+    ]
+  },
+  {
+    fieldType: 'DateTime',
+    fieldName: 'createAt',
+    fieldIsNull: false,
+    defaultValue: '',
+    primaryType: PrimaryType.B,
+    direct: [
+      {
+        directType: 'createdAt'
+      }
+    ]
+  },
+  {
+    fieldType: 'DateTime',
+    fieldName: 'updateAt',
+    fieldIsNull: false,
+    defaultValue: '',
+    primaryType: PrimaryType.B,
+    direct: [
+      {
+        directType: 'updatedAt'
       }
     ]
   }

@@ -13,12 +13,12 @@ export default class NodeConfig {
   constructor(colorVal) {
     this.config = {
       shape: 'vue-shape',
-      width: 100,
-      height: 60,
+      width: 150,
+      height: 160,
       attrs: {
         body: {
-          width: 100,
-          height: 60,
+          width: 150,
+          height: 160,
           stroke: colorVal
         }
       },

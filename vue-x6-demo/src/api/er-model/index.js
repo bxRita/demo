@@ -94,6 +94,17 @@ export async function getSysDictField(type) {
   return res.data.data
 }
 /**
+ *
+ * @returns 返回指令为dictionary时的可选值列表
+ */
+export async function getDictionaryValus() {
+  const res = await fetch({
+    url: 'getDictionaryTypeValues',
+    method: 'get'
+  })
+  return res.data.data
+}
+/**
  * @description 获取指令列表
  * @param {String} type
  */

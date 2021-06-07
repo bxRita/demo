@@ -17,6 +17,7 @@ import {
 } from '@/config'
 import GqlClass from './GqlClass.vue'
 import GqlEnum from './GqlEnum.vue'
+import { uuid } from '@/utils'
 /**
  * @description 获取连线通用配置
  * @param {*} param0
@@ -85,7 +86,7 @@ export function getClassNode(graph, options) {
     Object.assign(cfg.config, options, {
       cellType: ComponentType.C,
       bxDatas: {
-        modelName: 'table',
+        modelName: 'TABLE_' + uuid(),
         modelType: ComponentType.C,
         modelDesc: '',
         fieldsList: CLASS_DEFAULT_VAL
@@ -107,7 +108,7 @@ export function getEnumNode(graph, options) {
     Object.assign(cfg.config, options, {
       cellType: ComponentType.E,
       bxDatas: {
-        modelName: 'enum',
+        modelName: 'ENUM_' + uuid(),
         modelType: ComponentType.E,
         modelDesc: '',
         fieldsList: ENUM_DEFAULT_VAL
