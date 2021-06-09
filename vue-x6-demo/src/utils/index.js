@@ -22,3 +22,20 @@ export const uuid = () => {
     return v.toString(16)
   })
 }
+
+/**
+ * @description 获取URL上参数值
+ * @param {String} variable 变量名
+ * @returns
+ */
+export function getQueryVariable(variable) {
+  let query = window.location.search.substring(1)
+  let vars = query.split('&')
+  for (let i = 0; i < vars.length; i++) {
+    let pair = vars[i].split('=')
+    if (pair[0] == variable) {
+      return pair[1]
+    }
+  }
+  return false
+}

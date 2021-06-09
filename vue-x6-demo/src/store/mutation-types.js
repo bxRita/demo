@@ -17,6 +17,10 @@ export const INIT_DESIGN_CELL = 'INIT_DESIGN_CELL'
 /**
  * 初始化设计区组件
  */
+export const INIT_SERVER_CELL = 'INIT_SERVER_CELL'
+/**
+ * 初始化设计区组件
+ */
 export const CLEAN_DESIGN_CELL = 'CLEAN_DESIGN_CELL'
 /**
  * 初始化设计区组件

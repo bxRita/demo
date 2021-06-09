@@ -9,10 +9,13 @@
               >[<span style="color: #5f95ff">{{ item.fieldType }}</span
               >]</span
             >
+            <span v-else-if="isTable(item)" style="color: #5f95ff">{{
+              item.fieldType
+            }}</span>
             <span v-else>{{ item.fieldType }}</span>
 
-            <b v-if="item.fieldIsNull" style="color: red">!</b></span
-          >
+            <b v-if="item.fieldIsNull" style="color: red">!</b>
+          </span>
         </a-list-item>
       </a-list>
     </a-card>
@@ -46,6 +49,9 @@ export default {
         }
       )
     },
+    tableTypes() {
+      return globalStore.getters['erModel/fieldTypes']()
+    },
     bxData() {
       return this.nodeData.bxDatas || DEFAULT
     },
@@ -62,6 +68,13 @@ export default {
           (foreignRela.foreignKeyType === BASE_MODELREL_TYPE.ONE2MUL.code ||
             foreignRela.foreignKeyType === BASE_MODELREL_TYPE.MUL2MUL.code)
         )
+      }
+    },
+    isTable() {
+      return function (item) {
+        const tabTypes = this.tableTypes
+        const { fieldType } = item
+        return tabTypes.find(item => item.code === fieldType)
       }
     }
   },

@@ -58,10 +58,11 @@ function loadLocaleMessages() {
     const matched = key.match(/[a-z]{2}-[a-z]{2}/i)
     if (matched && matched.length > 0) {
       const locale = matched[0]
-      // 加载iview的国际化信息
-      let iviewLang = {} //require('iview/src/locale/lang/' + locale).default
-      // 将iview的国际化定义合并进来，可在系统中覆盖iview中的国际化信息
-      messages[locale] = merge(iviewLang, locales(key))
+      // 加载antd的国际化信息
+      let commonLang = require('ant-design-vue/es/locale-provider/' +
+        locale.replace('-', '_')).default
+      // 将antd的国际化定义合并进来，可在系统中覆盖antd中的国际化信息
+      messages[locale] = merge(commonLang, locales(key))
     }
   })
   return messages

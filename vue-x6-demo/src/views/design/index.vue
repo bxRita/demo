@@ -8,7 +8,7 @@
           <tool-bar
             v-if="isReady"
             @change="changeGraph"
-            @command="previewModel"
+            @command="commanHandle"
           />
         </div>
         <!--中间画板区-->
@@ -48,10 +48,14 @@ import {
   deleteModel,
   createModel,
   updateModel,
-  previewAllModel
+  previewAllModel,
+  deploySchema,
+  getDeployLog
 } from '@/api/er-model'
 import { mapActions } from 'vuex'
 import PreviewSchema from './preview-schema'
+import { getQueryVariable } from '@/utils'
+
 export default {
   name: 'BuildModel',
   inheritAttrs: false,
@@ -93,6 +97,7 @@ export default {
   methods: {
     ...mapActions('erModel', [
       'initDesignCells',
+      'initServerCells',
       'bakServerCells',
       'setSelect',
       'updateCellById'
@@ -104,10 +109,12 @@ export default {
       this.currentCom.show = false
       this.currentCom.name = null
     },
-    async previewModel(command) {
+    async commanHandle(command) {
       switch (command) {
+        case ToolCommand.log:
+        case ToolCommand.sync:
         case ToolCommand.save:
-          this.saveHandle()
+          this[`${command}Handle`]()
           break
         case ToolCommand.preview:
           this.currentCom.name = PreviewSchema
@@ -143,6 +150,31 @@ export default {
     setSelectedNode(cell) {
       this.setSelect(cell)
     },
+    /**
+     * 工具栏 查看日志
+     */
+    async logHandle() {
+      let res = await getDeployLog()
+
+      this.currentCom.name = PreviewSchema
+      this.currentCom.op.title = '部署日志'
+      this.currentCom.op.codeContent = res.data
+      this.currentCom.show = true
+    },
+    /**
+     * 工具栏 数据同步
+     */
+    async syncHandle() {
+      try {
+        let res = await deploySchema()
+        this.$message.success(res.data)
+      } catch (e) {
+        this.$message.error('数据正在同步，稍后查看日志来检验')
+      }
+    },
+    /**
+     * 工具栏 保存
+     */
     async saveHandle() {
       let graph = this.baseGraph.graph,
         pageData = graph.toJSON()
@@ -234,19 +266,8 @@ export default {
         pageData = graph.toJSON()
       this.initDesignCells(pageData.cells)
     },
-    getQueryVariable(variable) {
-      let query = window.location.search.substring(1)
-      let vars = query.split('&')
-      for (let i = 0; i < vars.length; i++) {
-        let pair = vars[i].split('=')
-        if (pair[0] == variable) {
-          return pair[1]
-        }
-      }
-      return false
-    },
     async initGraphData() {
-      this.fileName = this.getQueryVariable('filename')
+      this.fileName = getQueryVariable('filename')
       let graph = this.baseGraph.graph
       let arrs = await getAllModel({
           filename: this.fileName
@@ -256,6 +277,7 @@ export default {
         nodes: [],
         edges: []
       }
+      this.initServerCells(arrs) // 备份服务端原始数据
       if (len) {
         for (let i = 0; i < len; i++) {
           let temp = arrs[i],

@@ -80,8 +80,10 @@ export const ENUM_DEFAULT_VAL = [
 ]
 // 工具栏命令
 export const ToolCommand = {
-  save: 'save',
-  preview: 'preview'
+  log: 'log', // 查看日志
+  sync: 'sync', // 数据同步
+  save: 'save', // 保存
+  preview: 'preview' // 预览
 }
 export const ComponentType = {
   E: 'ENUM', // 枚举

@@ -11,8 +11,7 @@
 import { Graph, Node, Shape } from '@antv/x6'
 import { CellController, EventController, X6Stencil } from './index'
 import { isEqual } from 'lodash'
-// import ReactDOM from 'react-dom';
-
+import { i18n } from '@/i18n'
 export default class X6BaseGraph {
   constructor(graphOptions) {
     /** 创建X6画布实例 */
@@ -32,7 +31,7 @@ export default class X6BaseGraph {
   static getInstance() {
     if (!this.graph) return this.graph
 
-    new Error('没有生成画布示例')
+    new Error(i18n.t('x6.nograph'))
   }
 
   initStencil(stencilDom) {

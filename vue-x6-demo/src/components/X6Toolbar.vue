@@ -53,132 +53,22 @@
       </a-button>
     </a-tooltip>
 
-    <a-tooltip placement="bottom">
+    <!-- 自定义button begin -->
+    <a-tooltip placement="bottom" v-for="(btn, idx) in customBtns" :key="idx">
       <template #title>
-        <span>复制 (Cmd + Shift + Z)</span>
+        <span>{{ btn.tip }}</span>
       </template>
       <a-button
-        name="copy"
+        :name="btn.name"
         @click="handleClick"
         class="item-space"
         size="small"
-        icon="copy"
+        :icon="btn.icon"
       >
+        {{ btn.label }}
       </a-button>
     </a-tooltip>
-
-    <a-tooltip placement="bottom">
-      <template #title>
-        <span>剪切 (Cmd + X)</span>
-      </template>
-      <a-button
-        name="cut"
-        @click="handleClick"
-        class="item-space"
-        size="small"
-        icon="scissor"
-      >
-      </a-button>
-    </a-tooltip>
-
-    <a-tooltip placement="bottom">
-      <template #title>
-        <span>粘贴 (Cmd + V)</span>
-      </template>
-      <a-button
-        name="paste"
-        @click="handleClick"
-        class="item-space"
-        size="small"
-        icon="snippets"
-      >
-      </a-button>
-    </a-tooltip>
-    <a-tooltip placement="bottom">
-      <template #title>
-        <span>Schema预览</span>
-      </template>
-      <a-button
-        name="preview"
-        @click="handlePreview"
-        class="item-space"
-        size="small"
-        icon="eye"
-      >
-      </a-button>
-    </a-tooltip>
-    <a-tooltip placement="bottom">
-      <template #title>
-        <span>保存PNG (Cmd + S)</span>
-      </template>
-      <a-button
-        name="savePNG"
-        @click="handleClick"
-        class="item-space"
-        size="small"
-        icon="download"
-      >
-        png
-      </a-button>
-    </a-tooltip>
-
-    <a-tooltip placement="bottom">
-      <template #title>
-        <span>保存SVG (Cmd + S)</span>
-      </template>
-      <a-button
-        name="saveSVG"
-        @click="handleClick"
-        class="item-space"
-        size="small"
-        icon="download"
-      >
-        svg
-      </a-button>
-    </a-tooltip>
-
-    <a-tooltip placement="bottom">
-      <template #title>
-        <span>打印 (Cmd + P)</span>
-      </template>
-      <a-button
-        name="print"
-        @click="handleClick"
-        class="item-space"
-        size="small"
-        icon="printer"
-      >
-      </a-button>
-    </a-tooltip>
-
-    <a-tooltip placement="bottom">
-      <template #title>
-        <span>导出 (Cmd + P)</span>
-      </template>
-      <a-button
-        name="toJSON"
-        @click="handleClick"
-        class="item-space"
-        size="small"
-      >
-        toJSON
-      </a-button>
-    </a-tooltip>
-
-    <a-tooltip placement="bottom">
-      <template #title>
-        <span>保存</span>
-      </template>
-      <a-button
-        icon="save"
-        name="save"
-        @click="handleSave"
-        class="item-space"
-        size="small"
-      >
-        Save
-      </a-button>
-    </a-tooltip>
+    <!-- 自定义button end -->
   </div>
 </template>
 
@@ -193,7 +83,75 @@ export default {
     return {
       canUndo: '',
       canRedo: '',
-      graph: getCurrentGraph()
+      graph: getCurrentGraph(),
+      customBtns: [
+        {
+          tip: '复制 (Cmd + Shift + Z)',
+          name: 'copy',
+          icon: 'copy',
+          label: ''
+        },
+        {
+          tip: '剪切 (Cmd + X)',
+          name: 'cut',
+          icon: 'scissor',
+          label: ''
+        },
+        {
+          tip: '粘贴 (Cmd + V)',
+          name: 'paste',
+          icon: 'snippets',
+          label: ''
+        },
+        {
+          tip: 'Schema预览',
+          name: ToolCommand.preview,
+          icon: 'eye',
+          label: ''
+        },
+        {
+          tip: '保存PNG (Cmd + S)',
+          name: 'savePNG',
+          icon: 'download',
+          label: 'png'
+        },
+        {
+          tip: '保存SVG (Cmd + S)',
+          name: 'saveSVG',
+          icon: 'download',
+          label: 'svg'
+        },
+        {
+          tip: '打印 (Cmd + P)',
+          name: 'print',
+          icon: 'printer',
+          label: ''
+        },
+        {
+          tip: '导出 (Cmd + P)',
+          name: 'toJSON',
+          icon: '',
+          label: 'toJSON'
+        },
+        {
+          tip: '保存',
+          name: ToolCommand.save,
+          icon: 'save',
+          label: '保存'
+        },
+        {
+          tip: '部署',
+          name: ToolCommand.sync,
+          icon: 'sync',
+          label: '部署'
+        },
+        {
+          tip: '查看日志',
+          name: ToolCommand.log,
+          icon: 'file-search',
+          label: 'Log'
+        }
+      ]
     }
   },
   mounted() {
@@ -202,15 +160,6 @@ export default {
     }, 200)
   },
   methods: {
-    handleSave() {
-      this.$emit('command', ToolCommand.save)
-    },
-    /**
-     * @description 预览
-     */
-    handlePreview() {
-      this.$emit('command', ToolCommand.preview)
-    },
     initEvent() {
       const { history } = this.graph
       history.on('change', () => {
@@ -272,6 +221,12 @@ export default {
     handleClick(event) {
       const name = event.currentTarget.name
       switch (name) {
+        case ToolCommand.log: // 查看日志
+        case ToolCommand.sync: // 部署
+        case ToolCommand.save: // 保存
+        case ToolCommand.preview: // 预览
+          this.$emit('command', name)
+          break
         case 'undo':
           this.graph.history.undo()
           this.$emit('change')

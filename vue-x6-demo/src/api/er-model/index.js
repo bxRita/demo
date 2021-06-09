@@ -115,3 +115,41 @@ export async function getDirectList() {
   })
   return res.data.data
 }
+/**
+ * @description 根据文件名，读取文件内容
+ * @param {String} fileName
+ * @returns
+ */
+export async function getFileContent(fileName) {
+  const res = await fetch({
+    url: `businessprojects/own/config/${fileName}`,
+    method: 'GET'
+  })
+  return res.data
+}
+
+/**
+ * @description 数据同步  schema部署
+ * @param
+ * @returns
+ */
+export async function deploySchema() {
+  const res = await fetch({
+    url: `deploy`,
+    method: 'GET'
+  })
+  return res.data
+}
+
+/**
+ * @description 查看部署日志
+ * @param
+ * @returns
+ */
+export async function getDeployLog() {
+  const res = await fetch({
+    url: `showLog`,
+    method: 'GET'
+  })
+  return res.data
+}

@@ -1,1 +1,21 @@
-{}
+{
+  "common": {
+    "required": "Required"
+  },
+  "product": {
+    "model": {
+      "config": {
+        "fieldName": "Field Name",
+        "fieldType": "Field Type",
+        "fieldDesc": "Field Desc"
+      }
+    }
+  },
+  "x6": {
+    "component": "Component",
+    "searchplaceholder": "Search...",
+    "notfound": "Not Found",
+    "basic": "Basic Node",
+    "nograph": "No Graphql Entity"
+  }
+}

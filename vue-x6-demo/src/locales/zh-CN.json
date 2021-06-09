@@ -10,5 +10,12 @@
         "fieldDesc": "字段描述"
       }
     }
+  },
+  "x6": {
+    "component": "组件",
+    "searchplaceholder": "根据组件名称搜索",
+    "notfound": "Not Found",
+    "basic": "基础节点",
+    "nograph": "'没有生成画布示例'"
   }
 }

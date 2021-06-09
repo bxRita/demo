@@ -1,48 +1,51 @@
 <template>
   <a-tabs defaultActiveKey="1">
     <a-tab-pane tab="配置实体类" key="1">
-      <a-row align="middle">
-        <a-col :span="6">名称</a-col>
-        <a-col :span="18">
-          <a-input v-model="name" style="width: 100%" @change="changeName()" />
-        </a-col>
-      </a-row>
-      <a-row align="middle">
-        <a-col :span="6">类型</a-col>
-        <a-col :span="18">
+      <a-form-model
+        ref="ruleForm"
+        :model="form"
+        :rules="rules"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+      >
+        <a-form-model-item label="名称" prop="name">
+          <a-input v-model="form.name" @change="changeName()" />
+        </a-form-model-item>
+        <a-form-model-item label="类型" prop="type">
           <a-select
-            default-value="Class"
-            v-model="type"
+            v-model="form.type"
             style="width: 100%"
             @change="handleChangeType"
           >
-            <a-select-option value="class"> 类 </a-select-option>
-            <a-select-option value="interface"> 接口 </a-select-option>
+            <a-select-option
+              :value="t.value"
+              v-for="t in types"
+              :key="t.value"
+              >{{ t.text }}</a-select-option
+            >
           </a-select>
-        </a-col>
-      </a-row>
-      <a-row align="middle">
-        <a-col :span="6">属性</a-col>
-        <a-col :span="8">
+        </a-form-model-item>
+        <a-form-model-item label="属性">
           <a-button @click="showFiledManager" type="primary">属性管理</a-button>
-          <FieldManager
-            v-bind="fieldOp"
-            v-if="fieldOp.show"
-            @ok="fieldManagerOk"
-            @cancel="fieldManagerCancel"
-          ></FieldManager>
-        </a-col>
-      </a-row>
+        </a-form-model-item>
+      </a-form-model>
+      <FieldManager
+        v-bind="fieldOp"
+        v-if="fieldOp.show"
+        @ok="fieldManagerOk"
+        @cancel="fieldManagerCancel"
+      ></FieldManager>
     </a-tab-pane>
   </a-tabs>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import { Shape } from '@antv/x6'
 import FieldManager from './FieldManager'
 import { cloneDeep } from 'lodash'
 import { getCurrentGraph } from '@/utils/graphUtil'
-import { DICTIONARY_TYPE, X6CellType } from '@/config'
+import { DICTIONARY_TYPE, X6CellType, ComponentType } from '@/config'
 import { getSysDictField } from '@/api/er-model'
 import { getEdgeCommonCfg } from '@/components/nodes'
 export default {
@@ -63,11 +66,38 @@ export default {
     }
   },
   data() {
+    let validateName = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('名称不能为空'))
+      } else {
+        // TODO:
+        this.validNameExist(value, callback)
+      }
+    }
+
     return {
+      types: [
+        {
+          value: ComponentType.C,
+          text: '类'
+        },
+        {
+          value: ComponentType.I,
+          text: '接口'
+        }
+      ],
+      labelCol: { span: 6 },
+      wrapperCol: { span: 18 },
+      other: '',
+      form: {
+        name: '',
+        type: ComponentType.C
+      },
+      rules: {
+        name: [{ validator: validateName, trigger: 'change' }]
+      },
       graph: getCurrentGraph(),
       scaleTypes: [],
-      name: '',
-      type: '',
       fieldOp: {
         basisTypes: [],
         primaryTypes: [],
@@ -76,6 +106,9 @@ export default {
         fields: []
       }
     }
+  },
+  computed: {
+    ...mapGetters('erModel', ['fieldTypes', 'serverCells'])
   },
   async mounted() {
     this.init(this.cellData)
@@ -86,16 +119,31 @@ export default {
     }
   },
   methods: {
+    ...mapActions('erModel', []),
+    /**
+     * @description 校验名称是否存在
+     */
+    validNameExist(value, callback) {
+      let datas = this?.serverCells || []
+      let isExist = datas.find(
+        item =>
+          item.modelName == value && item.modelPosition.id !== this.cellData.id
+      )
+      if (isExist) {
+        callback(new Error(`${value}该名称已存在！`))
+      } else {
+        callback()
+      }
+    },
     save() {
       this.saveModel(this.cellData)
     },
     async init(cellData) {
-      this.name = cellData.bxDatas.modelName
+      this.form.name = cellData.bxDatas.modelName
       this.fieldOp.fields = cellData.bxDatas.fieldsList
-      this.fieldOp.fieldTypes =
-        cloneDeep(this?.$store?.getters['erModel/fieldTypes']()) || []
+      this.fieldOp.fieldTypes = cloneDeep(this?.fieldTypes()) || []
 
-      this.type = cellData.cellType
+      this.form.type = cellData.cellType
 
       this.fieldOp.basisTypes = await getSysDictField(
         DICTIONARY_TYPE.BASE_FIELD_TYPE
@@ -106,6 +154,8 @@ export default {
       this.fieldOp.foreignTypes = await getSysDictField(
         DICTIONARY_TYPE.BASE_MODELREL_TYPE
       )
+
+      this.$refs.ruleForm.validate()
     },
     /**
      * @description 属性管理界面  点击确认 回调方法
@@ -273,12 +323,12 @@ export default {
       this.updateCellCallBack && this.updateCellCallBack(this.cellData)
     },
     handleChangeType() {
-      this.cellData.cellType = this.type
+      this.cellData.cellType = this.form.type
 
       this.updateCell(this.cellData)
     },
     changeName() {
-      this.cellData.bxDatas.modelName = this.name
+      this.cellData.bxDatas.modelName = this.form.name
       this.updateCell(this.cellData)
     }
   }

@@ -10,15 +10,15 @@
 import { Addon } from '@antv/x6'
 import { getClassNode, getEnumNode } from '@/components/nodes'
 import { ComponentType } from '@/config'
-
+import { i18n } from '@/i18n'
 export default class X6Stencil {
   constructor(x6BaseGraph, stencilContainerDom) {
     this.graph = x6BaseGraph.graph
     this.stencil = new Addon.Stencil({
-      title: 'Components',
+      title: i18n.t('x6.component'),
       target: this.graph,
-      placeholder: 'Search by shape name',
-      notFoundText: 'Not Found',
+      placeholder: i18n.t('x6.searchplaceholder'),
+      notFoundText: i18n.t('x6.notfound'),
       collapsable: true,
       search(cell, keyword) {
         return cell.shape.indexOf(keyword) !== -1
@@ -28,7 +28,7 @@ export default class X6Stencil {
       groups: [
         {
           name: 'basic',
-          title: '基础节点',
+          title: i18n.t('x6.basic'),
           graphHeight: 180,
           layoutOptions: {
             columns: 2,

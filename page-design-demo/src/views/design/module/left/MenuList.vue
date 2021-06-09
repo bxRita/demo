@@ -18,10 +18,7 @@
         <span slot="title"
           ><span>{{ node.name }}</span></span
         >
-        <menu-list
-          :menus="node.children"
-          @menuSelected="handleClick"
-        ></menu-list>
+        <menu-list :menus="node.children" v-on="$listeners"></menu-list>
       </a-sub-menu>
 
       <a-menu-item :key="node.id" v-else>

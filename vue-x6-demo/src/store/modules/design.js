@@ -2,17 +2,18 @@ import {
   ADD_DESIGN_CELL,
   UPDATE_DESIGN_CELL_BY_ID,
   INIT_DESIGN_CELL,
+  INIT_SERVER_CELL,
   CLEAN_DESIGN_CELL,
   SET_CURRENT_SELECT_CELL,
   UPDATE_RELATE_CELL_EDGE
 } from '../mutation-types'
 import { X6CellType } from '@/config'
-import { cloneDeep } from 'lodash-es'
 const design = {
   namespaced: true,
   state: {
     // 设计界面JSON数据
     designCells: [],
+    serverCells: [], // 备份服务端初始化数据
     currentSelectCell: null // 当前选中的节点
   },
   getters: {
@@ -24,12 +25,14 @@ const design = {
         return {
           code: item.bxDatas.modelName,
           id: item.id,
-          data: item.bxDatas
+          data: item.bxDatas,
+          isSaved: item.isSaved
         }
       })
     },
     currentSelectCell: state => state.currentSelectCell,
     designCells: state => state.designCells,
+    serverCells: state => state.serverCells,
     getCellById: state => id => {
       return state.designCells.find(item => item.id === id)
     }
@@ -57,6 +60,9 @@ const design = {
     [SET_CURRENT_SELECT_CELL]: (state, payload) => {
       state.currentSelectCell = payload
     },
+    [INIT_SERVER_CELL]: (state, payload) => {
+      state.serverCells = payload
+    },
     [INIT_DESIGN_CELL]: (state, payload) => {
       state.designCells = payload
     },
@@ -81,6 +87,9 @@ const design = {
     },
     clean({ commit }) {
       commit(CLEAN_DESIGN_CELL)
+    },
+    initServerCells({ commit }, payload) {
+      commit(INIT_SERVER_CELL, payload)
     },
     initDesignCells({ commit }, payload) {
       commit(INIT_DESIGN_CELL, payload)
